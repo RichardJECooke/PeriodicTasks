@@ -8,6 +8,15 @@
 
 Run in top level: periodicTaskTracker folder
 
+### Without Node
+
+npm install
+npx neu update
+npx neu run
+npx neu build
+
+### With Docker
+
 ```sh
 docker build -t neuimage .
 xhost +local:docker
