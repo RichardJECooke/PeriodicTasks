@@ -32,7 +32,7 @@
   },
   "modes": {
     "window": {
-      "title": "myapp",
+      "title": "sample",
       "width": 800,
       "height": 500,
       "minWidth": 400,
@@ -41,12 +41,12 @@
       "fullScreen": false,
       "alwaysOnTop": false,
       "icon": "/resources/icons/appIcon.png",
-      "enableInspector": true,
+      "enableInspector": false,
       "borderless": false,
       "maximize": false,
       "hidden": false,
       "resizable": true,
-      "exitProcessOnClose": false
+      "exitProcessOnClose": true
     },
     "browser": {
       "globalVariables": {
@@ -73,7 +73,7 @@
     }
   },
   "cli": {
-    "binaryName": "myapp",
+    "binaryName": "sample",
     "resourcesPath": "/resources/",
     "extensionsPath": "/extensions/",
     "clientLibrary": "/resources/js/neutralino.js",

@@ -6,10 +6,27 @@
 
 ## Run
 
+Run in top level: periodicTaskTracker folder
+
 ```sh
-docker run --init  -it --rm --name "app" -v ".:/app" -w "/app" node:23-alpine3.19 sh -c  "npm install && npx neu run"
+docker build -t neuimage .
+xhost +local:docker
+sudo chown -R $USER .
+docker run --init -it --rm --platform linux/amd64 --name "neu" -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY -v ".:/app" -w "/app" neuimage sh -c "cd /app && npm install @neutralinojs/neu && npx neu update"
+docker run --init -it --rm --platform linux/amd64 --name "neu" -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY -v ".:/app" -w "/app" neuimage sh -c "cd /app && npx neu run"
+xhost -local:docker
+```
 
-docker run --init  -it --rm --name "app" -v ".:/app" -w "/app" node:23-alpine3.19 sh -c  "npm install @neutralinojs/neu "
-docker run --init  -it --rm --name "app" -v ".:/app" -w "/app" node:23-alpine3.19 sh -c  "npx neu create myapp"
+## Build
 
+```sh
+docker run --init -it --rm --platform linux/amd64 --name "neu" -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY -v ".:/app" -w "/app" neuimage sh -c "cd /app && npx neu build"
+```
+
+## Create the app
+
+Alpine doesn't work with neutralino. Must use node-slim
+
+```sh
+docker run --init  -it --rm --name "app" -v ".:/app" -w "/app" node:23-slim sh -c  "npx neu create myapp"
 ```
