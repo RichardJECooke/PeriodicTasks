@@ -2,13 +2,14 @@
 
 ## Todo
 
+- save config file and open it
 - add open source licence file
 
 ## Run
 
 Run in top level: periodicTaskTracker folder
 
-### Without Node
+### With Node
 
 npm install
 npx neu update
