@@ -1,24 +1,28 @@
 start();
 
+const _dataFilePath = 'dataFilePath';
 
 async function start() {
     try {
         exitIfNotLinux()
         await Neutralino.init();
-        console.log('start');
         // Neutralino.events.on("trayMenuItemClicked", onTrayMenuItemClicked);
         Neutralino.events.on("windowClose", onWindowClose);
         // setTray();
-        // showInfo();    
-
-        await Neutralino.storage.setData('dataFilePath', JSON.stringify({ dataFilePath: '/tmp/data.js'}));
-        const path = await Neutralino.storage.getData('dataFilePath');
-        console.log(path);
-        console.log('console end');    
-    } 
+        // showInfo();
+        const savedpath = await Neutralino.storage.getData('dataFilePath');
+        console.log(savedpath)
+    }
     catch (e) {
         console.dir(e);
     }
+}
+async function saveFile() {
+    try {
+        const path = await Neutralino.os.showSaveDialog('Save your tasks', { defaultPath: '~/periodicTasks.js' });
+        await Neutralino.storage.setData(_dataFilePath, path);
+    }
+    catch (e) { console.dir(e); }
 }
 function showInfo() {
     document.getElementById('info').innerHTML = `
@@ -27,8 +31,6 @@ function showInfo() {
         <span>server: v${NL_VERSION} . client: v${NL_CVERSION}</span>
         `;
 }
-function openDocs() { Neutralino.os.open("https://neutralino.js.org/docs"); }
-function openTutorial() { Neutralino.os.open("https://www.youtube.com/c/CodeZri"); }
 function setTray() {
     if(NL_MODE != "window") {
         console.log("INFO: Tray menu is only available in the window mode.");
