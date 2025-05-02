@@ -10,12 +10,16 @@ async function start() {
         Neutralino.events.on("windowClose", onWindowClose);
         // setTray();
         // showInfo();
-        const savedpath = await Neutralino.storage.getData('dataFilePath');
-        console.log(savedpath)
+        await loadDataFile();
     }
-    catch (e) {
-        console.dir(e);
+    catch (e) { console.dir(e); }
+}
+async function loadDataFile() {
+    try {
+        const path = await Neutralino.storage.getData(_dataFilePath);
+        if (path) loadfile todo
     }
+    catch (e) { console.dir(e); }
 }
 async function saveFile() {
     try {
