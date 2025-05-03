@@ -14,9 +14,10 @@
     "writeToLogFile": true
   },
   "nativeAllowList": [
-    "app.*",
-    "os.*",
-    "debug.log",
+    "app.exit",
+    "filesystem.readFile",
+    "filesystem.writeFile",
+    "os.showMessageBox", "os.showSaveDialog",
     "storage.setData", "storage.getData"
   ],
   "globalVariables": {

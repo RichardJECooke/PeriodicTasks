@@ -1,30 +1,43 @@
-start();
+const _dataFilePathName = 'dataFilePath';
+let _dataFilePath = null;
+let _tasks = null;
 
-const _dataFilePath = 'dataFilePath';
+start();
 
 async function start() {
     try {
-        exitIfNotLinux()
         await Neutralino.init();
-        // Neutralino.events.on("trayMenuItemClicked", onTrayMenuItemClicked);
         Neutralino.events.on("windowClose", onWindowClose);
+        exitIfNotLinux();
+        // Neutralino.events.on("trayMenuItemClicked", onTrayMenuItemClicked);
         // setTray();
         // showInfo();
         await loadDataFile();
+        await saveDataFile();
     }
     catch (e) { console.dir(e); }
 }
 async function loadDataFile() {
     try {
-        const path = await Neutralino.storage.getData(_dataFilePath);
-        if (path) loadfile todo
+        _dataFilePath = await Neutralino.storage.getData(_dataFilePathName);
+        if (!_dataFilePath) return;
+        const fileContent = await Neutralino.filesystem.readFile(_dataFilePath);
+        _tasks = JSON.parse(fileContent);
     }
     catch (e) { console.dir(e); }
 }
-async function saveFile() {
+async function saveDataFile() {
+    try {
+        if (!_dataFilePath) chooseFileLocation();
+        if (!_dataFilePath) return;
+        await Neutralino.filesystem.writeFile(_dataFilePath, JSON.stringify(_tasks));
+    }
+    catch (e) { console.dir(e); }
+}
+async function chooseFileLocation() {
     try {
         const path = await Neutralino.os.showSaveDialog('Save your tasks', { defaultPath: '~/periodicTasks.js' });
-        await Neutralino.storage.setData(_dataFilePath, path);
+        await Neutralino.storage.setData(_dataFilePathName, path);
     }
     catch (e) { console.dir(e); }
 }
