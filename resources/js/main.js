@@ -4,6 +4,8 @@ let _tasks = null;
 
 start();
 
+todo add task
+
 async function start() {
     try {
         await Neutralino.init();
