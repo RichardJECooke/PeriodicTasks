@@ -17,7 +17,7 @@
     "app.exit",
     "filesystem.readFile",
     "filesystem.writeFile",
-    "os.showMessageBox", "os.showSaveDialog",
+    "os.showMessageBox", "os.showSaveDialog", "os.showOpenDialog",
     "storage.setData", "storage.getData"
   ],
   "globalVariables": {

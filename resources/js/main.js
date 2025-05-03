@@ -1,10 +1,9 @@
 const _dataFilePathName = 'dataFilePath';
+const _defaultPath = '~/periodicTasks.js';
 let _dataFilePath = null;
 let _tasks = null;
 
 start();
-
-todo add task
 
 async function start() {
     try {
@@ -14,12 +13,31 @@ async function start() {
         // Neutralino.events.on("trayMenuItemClicked", onTrayMenuItemClicked);
         // setTray();
         // showInfo();
-        await loadDataFile();
-        await saveDataFile();
+        await loadPreviouslyUsedDataFile();
+        await addAddTaskButton();
     }
     catch (e) { console.dir(e); }
 }
-async function loadDataFile() {
+async function addAddTaskButton() {
+    const button = document.createElement('button');
+    button.textContent = 'Add task';
+    button.id = 'addTaskButton';
+    button.onclick = addTask;
+    document.getElementById('app').appendChild(button);
+}
+async function addTask() {
+    
+}
+async function openDataFile() {
+    try {
+        chooseOpenFileLocation();
+        if (!_dataFilePath) return;
+        const fileContent = await Neutralino.filesystem.readFile(_dataFilePath);
+        _tasks = JSON.parse(fileContent);
+    }
+    catch (e) { console.dir(e); }
+}
+async function loadPreviouslyUsedDataFile() {
     try {
         _dataFilePath = await Neutralino.storage.getData(_dataFilePathName);
         if (!_dataFilePath) return;
@@ -30,16 +48,27 @@ async function loadDataFile() {
 }
 async function saveDataFile() {
     try {
-        if (!_dataFilePath) chooseFileLocation();
+        if (!_dataFilePath) chooseSaveFileLocation();
         if (!_dataFilePath) return;
         await Neutralino.filesystem.writeFile(_dataFilePath, JSON.stringify(_tasks));
     }
     catch (e) { console.dir(e); }
 }
-async function chooseFileLocation() {
+async function chooseSaveFileLocation() {
     try {
-        const path = await Neutralino.os.showSaveDialog('Save your tasks', { defaultPath: '~/periodicTasks.js' });
-        await Neutralino.storage.setData(_dataFilePathName, path);
+        _dataFilePath = await Neutralino.os.showSaveDialog('Save your tasks', { defaultPath: _defaultPath });
+        await Neutralino.storage.setData(_dataFilePathName, _dataFilePath);
+    }
+    catch (e) { console.dir(e); }
+}
+async function chooseOpenFileLocation() {
+    try {
+        let entries = await Neutralino.os.showOpenDialog('Load your tasks', {
+            defaultPath: _defaultPath
+            // ,filters: [ {name: 'JSON files', extensions: ['json', 'js']}  ]
+        });
+        if (!entries || entries.length == 0) return;
+        _dataFilePath = entries[0];
     }
     catch (e) { console.dir(e); }
 }
