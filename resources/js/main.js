@@ -1,7 +1,7 @@
 const _dataFilePathName = 'dataFilePath';
 const _defaultPath = '~/periodicTasks.js';
 let _dataFilePath = null;
-let _tasks = null;
+let _tasks = {tasks: []};
 
 start();
 
@@ -26,7 +26,11 @@ async function addAddTaskButton() {
     document.getElementById('app').appendChild(button);
 }
 async function addTask() {
-    
+    _tasks.tasks.push({'id': newguid, 'name': '', 'days': 1, dependsOnLastCompletion: true});
+    await refreshTasks();
+}
+async function refreshTasks() {
+    for (let task of _tasks.tasks)
 }
 async function openDataFile() {
     try {
