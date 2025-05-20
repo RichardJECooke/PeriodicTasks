@@ -1,5 +1,9 @@
 {
   "dependencies": {
-    "@neutralinojs/neu": "^11.4.0"
+    "@neutralinojs/neu": "^11.4.0",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "parcel": "^2.15.1"
   }
 }

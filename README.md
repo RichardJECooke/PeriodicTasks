@@ -9,14 +9,21 @@
 
 Run in top level: periodicTaskTracker folder
 
-### With Node
+### With Node directly on host - use this
 
-npm install
-npx neu update
-npx neu run
+```sh
+npm install;
+npx neu update;
+
+rm -rf .parcel-cache/ build/; mkdir build; cp resources/js/neutralino.js build; npx parcel watch resources/index.html --dist-dir build --public-url ./;
+npx neu run;
+
 npx neu build
+```
 
 ### With Docker
+
+Doesn't work properly with display integration. Better to use VM.
 
 ```sh
 docker build -t neuimage .

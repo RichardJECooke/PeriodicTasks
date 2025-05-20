@@ -1,3 +1,5 @@
+import {v4 as uuid} from 'uuid';
+
 const _dataFilePathName = 'dataFilePath';
 const _defaultPath = '~/periodicTasks.js';
 let _dataFilePath = null;
@@ -26,11 +28,13 @@ async function addAddTaskButton() {
     document.getElementById('app').appendChild(button);
 }
 async function addTask() {
-    _tasks.tasks.push({'id': newguid, 'name': '', 'days': 1, dependsOnLastCompletion: true});
+    _tasks.tasks.push({'id': uuid(), 'name': '', 'days': 1, dependsOnLastCompletion: true});
     await refreshTasks();
 }
 async function refreshTasks() {
-    for (let task of _tasks.tasks)
+    for (let task of _tasks.tasks){
+
+    }
 }
 async function openDataFile() {
     try {
