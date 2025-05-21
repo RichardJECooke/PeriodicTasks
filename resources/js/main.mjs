@@ -28,7 +28,9 @@ async function addAddTaskButton() {
     document.getElementById('app').appendChild(button);
 }
 async function addTask() {
-    _tasks.tasks.push({'id': uuid(), 'name': '', 'days': 1, dependsOnLastCompletion: true});
+    const task = {'id': uuid(), 'name': '', 'days': 1, dependsOnLastCompletion: true};
+    console.log(task);
+    _tasks.tasks.push(task);
     await refreshTasks();
 }
 async function refreshTasks() {

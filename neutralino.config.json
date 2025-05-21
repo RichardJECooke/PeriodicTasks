@@ -79,7 +79,7 @@
     "binaryName": "periodicTaskTracker",
     "resourcesPath": "/build/",
     "extensionsPath": "/extensions/",
-    "clientLibrary": "/resources/js/neutralino.js",
+    "clientLibrary": "/build/js/neutralino.js",
     "binaryVersion": "6.0.0",
     "clientVersion": "6.0.0"
   }

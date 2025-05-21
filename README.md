@@ -15,7 +15,7 @@ Run in top level: periodicTaskTracker folder
 npm install;
 npx neu update;
 
-rm -rf .parcel-cache/ build/; mkdir build; cp resources/js/neutralino.js build; npx parcel watch resources/index.html --dist-dir build --public-url ./;
+rm -rf .parcel-cache/ build/; mkdir build;  mkdir build/js; cp -r resources/. build/; npx parcel watch resources/js/main.mjs --dist-dir build --public-url ./;  # can't build the neutralino.js file with parcel or it breaks - todo - use https://www.npmjs.com/package/parcel-resolver-ignore instead
 npx neu run;
 
 npx neu build
