@@ -1,9 +1,5 @@
-import {v4 as uuid} from 'uuid';
-
-const _dataFilePathName = 'dataFilePath';
-const _defaultPath = '~/periodicTasks.js';
-let _dataFilePath = null;
-let _tasks = {tasks: []};
+import {v4 as _uuid} from 'uuid';
+import * as _constants from '../resources/js/constants.mjs';
 
 start();
 
@@ -28,7 +24,7 @@ async function addAddTaskButton() {
     document.getElementById('app').appendChild(button);
 }
 async function addTask() {
-    const task = {'id': uuid(), 'name': '', 'days': 1, dependsOnLastCompletion: true};
+    const task = {'id': _uuid(), 'name': '', 'days': 1, dependsOnLastCompletion: true};
     console.log(task);
     _tasks.tasks.push(task);
     await refreshTasks();
@@ -38,32 +34,6 @@ async function refreshTasks() {
 
     }
 }
-async function openDataFile() {
-    try {
-        chooseOpenFileLocation();
-        if (!_dataFilePath) return;
-        const fileContent = await Neutralino.filesystem.readFile(_dataFilePath);
-        _tasks = JSON.parse(fileContent);
-    }
-    catch (e) { console.dir(e); }
-}
-async function loadPreviouslyUsedDataFile() {
-    try {
-        _dataFilePath = await Neutralino.storage.getData(_dataFilePathName);
-        if (!_dataFilePath) return;
-        const fileContent = await Neutralino.filesystem.readFile(_dataFilePath);
-        _tasks = JSON.parse(fileContent);
-    }
-    catch (e) { console.dir(e); }
-}
-async function saveDataFile() {
-    try {
-        if (!_dataFilePath) chooseSaveFileLocation();
-        if (!_dataFilePath) return;
-        await Neutralino.filesystem.writeFile(_dataFilePath, JSON.stringify(_tasks));
-    }
-    catch (e) { console.dir(e); }
-}
 async function chooseSaveFileLocation() {
     try {
         _dataFilePath = await Neutralino.os.showSaveDialog('Save your tasks', { defaultPath: _defaultPath });
@@ -71,10 +41,11 @@ async function chooseSaveFileLocation() {
     }
     catch (e) { console.dir(e); }
 }
+
 async function chooseOpenFileLocation() {
     try {
         let entries = await Neutralino.os.showOpenDialog('Load your tasks', {
-            defaultPath: _defaultPath
+            defaultPath: _constants.defaultPath
             // ,filters: [ {name: 'JSON files', extensions: ['json', 'js']}  ]
         });
         if (!entries || entries.length == 0) return;
@@ -82,6 +53,7 @@ async function chooseOpenFileLocation() {
     }
     catch (e) { console.dir(e); }
 }
+
 function showInfo() {
     document.getElementById('info').innerHTML = `
         ${NL_APPID} is running on port ${NL_PORT} inside ${NL_OS}
@@ -89,6 +61,7 @@ function showInfo() {
         <span>server: v${NL_VERSION} . client: v${NL_CVERSION}</span>
         `;
 }
+
 function setTray() {
     if(NL_MODE != "window") {
         console.log("INFO: Tray menu is only available in the window mode.");
@@ -104,6 +77,7 @@ function setTray() {
     };
     Neutralino.os.setTray(tray);
 }
+
 function onTrayMenuItemClicked(event) {
     switch(event.detail.id) {
         case "VERSION":
@@ -114,5 +88,6 @@ function onTrayMenuItemClicked(event) {
             break;
     }
 }
+
 function onWindowClose() { Neutralino.app.exit(); }
 function exitIfNotLinux() { if (NL_OS != 'Linux') Neutralino.app.exit(); }
