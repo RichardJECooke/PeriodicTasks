@@ -1,1 +1,1 @@
-export const defaultPath = '~/periodicTasks.js';
+export const defaultSavePath = '~/periodicTasks.js';

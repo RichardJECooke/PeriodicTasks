@@ -1,5 +1,5 @@
-import {v4 as _uuid} from 'uuid';
-import * as _constants from '../resources/js/constants.mjs';
+import * as _fileHelper from './fileHelper.mjs';
+import * as _ui from './ui.mjs';
 
 start();
 
@@ -11,48 +11,13 @@ async function start() {
         // Neutralino.events.on("trayMenuItemClicked", onTrayMenuItemClicked);
         // setTray();
         // showInfo();
-        await loadPreviouslyUsedDataFile();
-        await addAddTaskButton();
-    }
-    catch (e) { console.dir(e); }
-}
-async function addAddTaskButton() {
-    const button = document.createElement('button');
-    button.textContent = 'Add task';
-    button.id = 'addTaskButton';
-    button.onclick = addTask;
-    document.getElementById('app').appendChild(button);
-}
-async function addTask() {
-    const task = {'id': _uuid(), 'name': '', 'days': 1, dependsOnLastCompletion: true};
-    console.log(task);
-    _tasks.tasks.push(task);
-    await refreshTasks();
-}
-async function refreshTasks() {
-    for (let task of _tasks.tasks){
-
-    }
-}
-async function chooseSaveFileLocation() {
-    try {
-        _dataFilePath = await Neutralino.os.showSaveDialog('Save your tasks', { defaultPath: _defaultPath });
-        await Neutralino.storage.setData(_dataFilePathName, _dataFilePath);
+        await _fileHelper.loadPreviouslyUsedDataFile();
+        await _ui.addAddTaskButton();
     }
     catch (e) { console.dir(e); }
 }
 
-async function chooseOpenFileLocation() {
-    try {
-        let entries = await Neutralino.os.showOpenDialog('Load your tasks', {
-            defaultPath: _constants.defaultPath
-            // ,filters: [ {name: 'JSON files', extensions: ['json', 'js']}  ]
-        });
-        if (!entries || entries.length == 0) return;
-        _dataFilePath = entries[0];
-    }
-    catch (e) { console.dir(e); }
-}
+// Old neutralino sample code: -----
 
 function showInfo() {
     document.getElementById('info').innerHTML = `

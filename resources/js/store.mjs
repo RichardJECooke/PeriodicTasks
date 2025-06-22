@@ -1,1 +1,1 @@
-let _tasks = {tasks: []};
+export const tasks = {tasks: []};

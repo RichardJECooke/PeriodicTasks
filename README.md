@@ -2,7 +2,6 @@
 
 ## Todo
 
-- put code in modules
 - save config file and open it
 - add open source licence file
 - use parcel file exclude plugin - use https://www.npmjs.com/package/parcel-resolver-ignore instead
@@ -20,8 +19,9 @@ npm install;
 npx neu update;
 
 rm -rf .parcel-cache/ build/; mkdir build;  mkdir build/js; cp -r resources/. build/; npx parcel watch resources/js/main.mjs --dist-dir build --public-url ./;  # can't build the neutralino.js file with parcel or it breaks - todo - use https://www.npmjs.com/package/parcel-resolver-ignore instead
-npx neu run;
 
+# new terminal:
+npx neu run;
 # npx neu build # for later when deploying
 ```
 
