@@ -1,19 +1,14 @@
 import {v4 as _uuid} from 'uuid';
 import * as _constants from './constants.mjs';
 import * as _taskHelper from './taskHelper.mjs';
+import * as _store from './store.mjs';
 
 export async function addAddTaskButton() {
     const button = document.createElement('button');
     button.textContent = 'Add task';
     button.id = 'addTaskButton';
-    button.onclick =_taskHelper.addTask;
+    button.onclick = addTask;
     document.getElementById('app').appendChild(button);
-}
-
-export async function refreshTasks() {
-    for (let task of _tasks.tasks){
-
-    }
 }
 
 export async function chooseSaveFileLocation() {
@@ -35,4 +30,15 @@ export async function chooseOpenFileLocation() {
         _dataFilePath = entries[0];
     }
     catch (e) { console.dir(e); }
+}
+
+async function addTask() {
+    _taskHelper.addTask();
+    await refreshTasks();
+}
+
+async function refreshTasks() {
+    for (let task of _store.tasks.tasks){
+
+    }
 }

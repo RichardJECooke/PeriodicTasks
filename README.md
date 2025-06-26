@@ -2,6 +2,7 @@
 
 ## Todo
 
+- print tasks in refresh tasks
 - save config file and open it
 - add open source licence file
 - use parcel file exclude plugin - use https://www.npmjs.com/package/parcel-resolver-ignore instead
