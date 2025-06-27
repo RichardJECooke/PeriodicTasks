@@ -39,6 +39,7 @@ async function refreshTasks() {
     tasksUi.innerHTML = ''; 
     for (let task of _store.tasks.tasks) {
         const li = document.createElement('li');
+        li.id = task.id
         li.textContent = task.name;
         tasksUi.appendChild(li);
     }
