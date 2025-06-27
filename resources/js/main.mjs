@@ -1,4 +1,4 @@
-import * as _fileHelper from './fileHelper.mjs';
+import * as _fileHelper from './fileHelper.ts';
 import * as _ui from './ui.mjs';
 
 start();

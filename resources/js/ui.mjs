@@ -1,7 +1,7 @@
 import { v4 as _uuid } from 'uuid';
-import * as _constants from './constants.mjs';
-import * as _taskHelper from './taskHelper.mjs';
-import * as _store from './store.mjs';
+import * as _constants from './constants.ts';
+import * as _taskHelper from './taskHelper.ts';
+import * as _store from './store.ts';
 
 export async function addAddTaskButton() {
     const button = document.getElementById('addTaskButton');

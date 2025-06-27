@@ -1,8 +1,8 @@
-import * as _constants from './constants.mjs';
-import * as _store from './store.mjs';
+import * as _constants from './constants.ts';
+import * as _store from './store.ts';
 
 const _dataFilePathName = 'dataFilePath';
-let _dataFilePath = null;
+let _dataFilePath: string | null = null;
 
 export async function loadPreviouslyUsedDataFile() {
     try {
@@ -20,7 +20,7 @@ export async function openDataFile() {
         chooseOpenFileLocation();
         if (!_dataFilePath) return;
         const fileContent = await Neutralino.filesystem.readFile(_dataFilePath);
-        _store.tasks = JSON.parse(fileContent);
+        _store.tasks.tasks = (JSON.parse(fileContent) as typeof _store.tasks).tasks;
     }
     catch (e) { console.dir(e); }
 }
