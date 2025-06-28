@@ -17,8 +17,6 @@ export async function loadPreviouslyUsedDataFile() {
 
 export async function openDataFile() {
     try {
-        chooseOpenFileLocation();
-        if (!_dataFilePath) return;
         const fileContent = await Neutralino.filesystem.readFile(_dataFilePath);
         _store.tasks.tasks = (JSON.parse(fileContent) as typeof _store.tasks).tasks;
     }
@@ -27,9 +25,12 @@ export async function openDataFile() {
 
 export async function saveDataFile() {
     try {
-        if (!_dataFilePath) chooseSaveFileLocation();
-        if (!_dataFilePath) return;
         await Neutralino.filesystem.writeFile(_dataFilePath, JSON.stringify(_store.tasks));
     }
     catch (e) { console.dir(e); }
+}
+
+export async function setDataFilePath(path: string) {
+    _dataFilePath = path;
+    await Neutralino.storage.setData(_dataFilePathName, _dataFilePath);
 }

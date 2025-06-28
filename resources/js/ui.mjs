@@ -8,11 +8,36 @@ export async function addAddTaskButton() {
     button.onclick = addTask;
 }
 
+export async function addTask() {
+    _taskHelper.addTask();
+    await refreshTasks();
+}
+
+export async function saveDataFile() {
+    try {
+        if (!_store.dataFilePath) chooseSaveFileLocation();
+        if (!_store.dataFilePath) return;
+        await fileHelper.saveDataFile();
+    }
+    catch (e) { console.dir(e); }
+}
+
 export async function chooseSaveFileLocation() {
     try {
         const filePath = await Neutralino.os.showSaveDialog('Save your tasks', { defaultPath: _defaultPath });
-        _fileHelper.setDataFilePath = filePath;
-        await Neutralino.storage.setData(_dataFilePathName, _dataFilePath);
+        _store.dataFilePath = filePath;
+        _fileHelper.setDataFilePath(filePath);
+    }
+    catch (e) { console.dir(e); }
+}
+
+export async function openDataFile() {
+    try {
+        await chooseOpenFileLocation();
+        if (!_store.dataFilePath) return;
+        _fileHelper.setDataFilePath(_dataFilePath);
+        await _fileHelper.openDataFile()
+        await refreshTasks();
     }
     catch (e) { console.dir(e); }
 }
@@ -21,17 +46,12 @@ export async function chooseOpenFileLocation() {
     try {
         let entries = await Neutralino.os.showOpenDialog('Load your tasks', {
             defaultPath: _constants.defaultPath
-            // ,filters: [ {name: 'JSON files', extensions: ['json', 'js']}  ]
+            // ,filters: [ {name: 'JSON files', extensions: ['json', 'js']}  ] - does not work, bug
         });
         if (!entries || entries.length == 0) return;
-        _dataFilePath = entries[0];
+        _store.dataFilePath = entries[0];
     }
     catch (e) { console.dir(e); }
-}
-
-export async function addTask() {
-    _taskHelper.addTask();
-    await refreshTasks();
 }
 
 async function refreshTasks() {
