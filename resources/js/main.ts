@@ -20,7 +20,7 @@ async function start() {
 // Old neutralino sample code: -----
 
 function showInfo() {
-    document.getElementById('info').innerHTML = `
+    (document.getElementById('info') as HTMLDivElement).innerHTML = `
         ${NL_APPID} is running on port ${NL_PORT} inside ${NL_OS}
         <br/><br/>
         <span>server: v${NL_VERSION} . client: v${NL_CVERSION}</span>
@@ -43,7 +43,7 @@ function setTray() {
     Neutralino.os.setTray(tray);
 }
 
-function onTrayMenuItemClicked(event) {
+function onTrayMenuItemClicked(event: Neutralino.events.trayMenuItemClickedEvent) {
     switch(event.detail.id) {
         case "VERSION":
             Neutralino.os.showMessageBox("Version information", `Neutralinojs server: v${NL_VERSION} | Neutralinojs client: v${NL_CVERSION}`);
