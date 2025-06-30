@@ -1,5 +1,5 @@
 import * as _constants from './constants.ts';
-import * as _store from './store.ts';
+import {store as _store} from './store.ts';
 
 const _dataFilePathName = 'dataFilePath';
 let _dataFilePath: string | null = null;
@@ -10,22 +10,24 @@ export async function loadPreviouslyUsedDataFile() {
         if (!_dataFilePath) return;
         const fileContent = await Neutralino.filesystem.readFile(_dataFilePath);
         if (!fileContent) return;
-        _store.tasks.tasks = JSON.parse(fileContent)?.tasks || [];
+        _store.tasks = JSON.parse(fileContent)?.tasks || [];
     }
     catch (e) { console.dir(e); }
 }
 
 export async function openDataFile() {
     try {
-        const fileContent = await Neutralino.filesystem.readFile(_dataFilePath);
-        _store.tasks.tasks = (JSON.parse(fileContent) as typeof _store.tasks).tasks;
+        if (!_store.dataFilePath) throw new Error('No file path specified');
+        const fileContent = await Neutralino.filesystem.readFile(_store.dataFilePath);
+        _store.tasks = JSON.parse(fileContent) as typeof _store.tasks;
     }
     catch (e) { console.dir(e); }
 }
 
 export async function saveDataFile() {
     try {
-        await Neutralino.filesystem.writeFile(_dataFilePath, JSON.stringify(_store.tasks));
+        if (!_store.dataFilePath) throw new Error('No file path specified');
+        await Neutralino.filesystem.writeFile(_store.dataFilePath, JSON.stringify(_store.tasks));
     }
     catch (e) { console.dir(e); }
 }

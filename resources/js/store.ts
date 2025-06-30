@@ -1,4 +1,10 @@
 import * as _types from './types.ts';
 
-export const tasks: {tasks: _types.task[]} = {"tasks": []};
-export let dataFilePath: string | null = null;
+export const store: {
+    tasks: _types.task[],
+    dataFilePath: string | null
+} = 
+{
+    "tasks": [],
+    "dataFilePath": null
+};

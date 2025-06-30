@@ -1,5 +1,5 @@
 import * as _fileHelper from './fileHelper.ts';
-import * as _ui from './ui.mjs';
+import * as _ui from './ui.ts';
 
 start();
 
