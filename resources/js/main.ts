@@ -7,7 +7,8 @@ async function start() {
     try {
         await Neutralino.init();
         Neutralino.events.on("windowClose", onWindowClose);
-        exitIfNotLinux();
+        exitIfNotLinux(); 
+        (window as any)._ui = _ui; // so html can call ui
         // Neutralino.events.on("trayMenuItemClicked", onTrayMenuItemClicked);
         // setTray();
         // showInfo();

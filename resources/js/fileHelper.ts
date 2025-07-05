@@ -1,4 +1,5 @@
 import * as _constants from './constants.ts';
+import * as _types from './types.ts';
 import {store as _store} from './store.ts';
 
 const _dataFilePathName = 'dataFilePath';
@@ -19,7 +20,7 @@ export async function openDataFile() {
     try {
         if (!_store.dataFilePath) throw new Error('No file path specified');
         const fileContent = await Neutralino.filesystem.readFile(_store.dataFilePath);
-        _store.tasks = JSON.parse(fileContent) as typeof _store.tasks;
+        _store.tasks = JSON.parse(fileContent) as _types.task[];
     }
     catch (e) { console.dir(e); }
 }

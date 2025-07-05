@@ -4,3 +4,8 @@ export type task = {
   days: number;
   dependsOnLastCompletion: boolean;
 }
+
+export type store = {
+  tasks: task[],
+  dataFilePath: string | null
+}
