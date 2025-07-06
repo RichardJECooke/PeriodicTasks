@@ -3,6 +3,7 @@ import * as _constants from './constants.ts';
 import * as _taskHelper from './taskHelper.ts';
 import {store as _store} from './store.ts';
 import * as _fileHelper from './fileHelper.ts';
+import * as _vue from 'vue';
 
 export async function addAddTaskButton() {
     const button = document.getElementById('addTaskButton') as HTMLButtonElement;
