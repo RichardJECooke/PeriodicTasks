@@ -4,6 +4,15 @@ import * as _taskHelper from './taskHelper.ts';
 import {store as _store} from './store.ts';
 import * as _fileHelper from './fileHelper.ts';
 import * as _vue from 'vue';
+import _app from './vue/app.vue'
+
+export async function start() {
+    const app = _vue.createApp(_app);
+    app.config.errorHandler = (e: unknown): void => {
+        console.log(e);
+    }
+    app.mount('#app');
+}
 
 export async function addAddTaskButton() {
     const button = document.getElementById('addTaskButton') as HTMLButtonElement;
