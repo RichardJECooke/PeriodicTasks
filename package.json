@@ -5,6 +5,7 @@
     "vue": "^3.5.17"
   },
   "devDependencies": {
+    "@parcel/transformer-vue": "^2.15.1",
     "parcel": "^2.15.1"
   }
 }

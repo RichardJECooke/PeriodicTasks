@@ -2,7 +2,7 @@
 
 ## Todo
 
-- change to vue
+- dev branch - app.vue. start pulling the plain html code into components.
 - make ui components
 - save config file and open it
 - add open source licence file

@@ -1,10 +1,14 @@
+globalThis.__VUE_OPTIONS_API__ = false;
+globalThis.__VUE_PROD_DEVTOOLS__ = true;
+globalThis.__VUE_PROD_HYDRATION_MISMATCH_DETAILS__ = true;
+
 import { v4 as _uuid } from 'uuid';
 import * as _constants from './constants.ts';
 import * as _taskHelper from './taskHelper.ts';
-import {store as _store} from './store.ts';
+import { store as _store } from './store.ts';
 import * as _fileHelper from './fileHelper.ts';
 import * as _vue from 'vue';
-import _app from './vue/app.vue'
+import _app from './vue/app.vue';
 
 export async function start() {
     const app = _vue.createApp(_app);
@@ -45,9 +49,9 @@ export async function chooseSaveFileLocation() {
 export async function openDataFile() {
     try {
         await chooseOpenFileLocation();
-        if (!_store.dataFilePath) return;        
+        if (!_store.dataFilePath) return;
         _fileHelper.setDataFilePath(_store.dataFilePath);
-        await _fileHelper.openDataFile()        
+        await _fileHelper.openDataFile()
         await refreshTasks();
     }
     catch (e) { console.dir(e); }
@@ -67,7 +71,7 @@ export async function chooseOpenFileLocation() {
 
 async function refreshTasks() {
     const tasksUi = document.getElementById('tasks') as HTMLUListElement;
-    tasksUi.innerHTML = ''; 
+    tasksUi.innerHTML = '';
     for (let task of _store.tasks) {
         const li = document.createElement('li');
         li.id = task.id

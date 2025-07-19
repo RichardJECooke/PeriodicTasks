@@ -10,16 +10,20 @@ async function start() {
         exitIfNotLinux(); 
         (window as any)._ui = _ui; // so html can call ui
         _ui.start();
-        // Neutralino.events.on("trayMenuItemClicked", onTrayMenuItemClicked);
-        // setTray();
-        // showInfo();
         await _fileHelper.loadPreviouslyUsedDataFile();
-        await _ui.addAddTaskButton();
+        // await _ui.addAddTaskButton();
+        // startNeutralinoEvents();
     }
     catch (e) { console.dir(e); }
 }
 
 // Old neutralino sample code: -----
+
+function startNeutralinoEvents() {
+    Neutralino.events.on("trayMenuItemClicked", onTrayMenuItemClicked);
+    setTray();
+    showInfo();
+}
 
 function showInfo() {
     (document.getElementById('info') as HTMLDivElement).innerHTML = `
