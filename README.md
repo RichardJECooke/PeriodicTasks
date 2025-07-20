@@ -2,12 +2,18 @@
 
 ## Todo
 
-- dev branch - app.vue. start pulling the plain html code into components.
-- make ui components
+- edit task in taskListItemEdit.vue - name, days, depends
+- mark task as done today and save to task history
+- mark task as done at any date
+- display task history
+- edit and delete task history
+- add archiving and deletion of tasks
+- automatic saving on change with toast
+- display tasks next due date and rank by due date
 - save config file and open it
-- add open source licence file
 - use parcel file exclude plugin - use https://www.npmjs.com/package/parcel-resolver-ignore instead
-- use typescript
+- add open source licence file
+- set project to public
 
 ## Run
 

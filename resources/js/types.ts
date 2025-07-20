@@ -3,6 +3,8 @@ export type task = {
   name: string;
   days: number;
   dependsOnLastCompletion: boolean;
+  isArchived: boolean;
+  datesDone: Date[];
 }
 
 export type store = {

@@ -1,21 +1,14 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-const count = ref(0);
+import SaveTasks from './saveTasks.vue';
+import AddTask from './addTask.vue';
+import TaskList from './taskList.vue';
+import OpenTasks from './openTasks.vue';
 </script>
 
 <template>
   <h1>Periodic Task Tracker</h1>
-  <div><a href="#" onclick="_ui.saveDataFile();">Save tasks to file</a></div>
-  <div><a href="#" onclick="_ui.openDataFile();">Open tasks from file</a></div>
-  <button id="addTaskButton">Add task</button>
-  <div >
-    <ul id="tasks"></ul>
-  </div>
-  <button @click="count++">Count is: {{ count }}</button>
+  <div><OpenTasks /></div>
+  <div><SaveTasks /></div>
+  <div><AddTask /></div>
+  <div><TaskList /></div>
 </template>
-
-<style scoped>
-button {
-  font-weight: bold;
-}
-</style>
