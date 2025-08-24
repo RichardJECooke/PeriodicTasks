@@ -1,17 +1,15 @@
 <script setup lang="ts">
-import type { task } from '../types.ts';
-import { ref, type Ref } from 'vue';
+import * as vue from 'vue';
+import * as types from '../types.ts';
+import * as _taskHelper from '../taskHelper.ts';
+import TaskListItemEdit from './taskListItemEdit.vue';
 
-const props = defineProps<{task: task}>();
-let isEditing: Ref<boolean> = ref(false);
+const props = defineProps<{task: types.task}>();
+let isEditing: vue.Ref<boolean> = vue.ref(false);
+const getNumDaysUntilDue = _taskHelper.getNumDaysUntilDue; // entire file imports are not available in the template
 
 function startEditing() { isEditing.value = true; }
 function stopEditing() { isEditing.value = false; }
-function allowOnlyDigits(event: Event) {
-  const input = event.target as HTMLInputElement;
-  input.value = input.value.replace(/[^0-9]/g, '');
-  props.task.days = Number(input.value) || 1;
-}
 </script>
 
 <template>
@@ -19,23 +17,16 @@ function allowOnlyDigits(event: Event) {
 <!-- Readonly -->
   <div class="readonly" v-if="!isEditing"  v-on:click="startEditing">
     <span>{{ props.task.name }}</span>
-    · Due in 5 days
+    ·
+    Due
+    <span v-if="getNumDaysUntilDue(props.task) == 0">today</span>
+    <span v-if="getNumDaysUntilDue(props.task) <-1">{{ getNumDaysUntilDue(props.task) }} days ago</span>
+    <span v-if="getNumDaysUntilDue(props.task) <0 && getNumDaysUntilDue(props.task) >-1">{{ getNumDaysUntilDue(props.task) }} day ago</span>
+    <span v-if="getNumDaysUntilDue(props.task) >0 && getNumDaysUntilDue(props.task) <1">in {{ getNumDaysUntilDue(props.task) }} day</span>
+    <span v-if="getNumDaysUntilDue(props.task) >1">in {{ getNumDaysUntilDue(props.task) }} days</span>
   </div>
 <!-- Editing   -->
-  <div class="editing" v-if="isEditing">
-    <input  type="text" v-model="props.task.name" />
-    <br />
-    <span>Repeats every
-      <input type="number" step="1" min="1" v-bind:value="props.task.days" v-on:input="allowOnlyDigits" />
-      days
-    </span>
-    <br />
-    <label>
-      Next due date depends on last completion date:
-      <input type="checkbox" v-bind:checked="props.task.dependsOnLastCompletion" />
-    </label>
-    <br />
-    <input type="button" v-on:click="stopEditing" value="Done" />
-  </div>
+  <TaskListItemEdit v-if="isEditing" :key="props.task.id" :task="props.task"
+     :isEditing="isEditing" @stopEditingEvent="stopEditing" />
 </li>
 </template>
