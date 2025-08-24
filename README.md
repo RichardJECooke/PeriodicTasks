@@ -2,7 +2,6 @@
 
 ## Todo
 
-- edit task in taskListItemEdit.vue - name, days, depends
 - mark task as done today and save to task history
 - mark task as done at any date
 - display task history
@@ -14,6 +13,7 @@
 - use parcel file exclude plugin - use https://www.npmjs.com/package/parcel-resolver-ignore instead
 - add open source licence file
 - set project to public
+- make same project in gtk4/c and avalonia/c# and gtk4/zig
 
 ## Run
 
