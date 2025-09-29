@@ -2,7 +2,6 @@
 
 ## Todo
 
-- mark task as done today and save to task history
 - mark task as done at any date
 - display task history
 - edit and delete task history
