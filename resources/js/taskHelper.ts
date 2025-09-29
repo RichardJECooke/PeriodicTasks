@@ -10,7 +10,6 @@ export async function addTask(): Promise<void> {
 
 export function getNumDaysUntilDue(task : types.task): number {
   if (task.datesDone.length == 0) return 0;
-  task.datesDone.map((d) => console.log(d));
   const lastDoneDate = task.datesDone.toSorted((a, b) => b.getTime() - a.getTime())[0];
   lastDoneDate.setHours(0, 0, 0, 0);
   const msPerDay = 1000 * 60 * 60 * 24;

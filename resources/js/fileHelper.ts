@@ -3,24 +3,20 @@ import * as _types from './types.ts';
 import {store as _store} from './store.ts';
 
 const _dataFilePathName = 'dataFilePath';
-let _dataFilePath: string | null = null;
 
 export async function loadPreviouslyUsedDataFile() {
     try {
-        _dataFilePath = await Neutralino.storage.getData(_dataFilePathName);
-        if (!_dataFilePath) return;
-        const fileContent = await Neutralino.filesystem.readFile(_dataFilePath);
-        if (!fileContent) return;
-        _store.tasks = JSON.parse(fileContent)?.tasks || [];
+        const dataFilePath = await Neutralino.storage.getData(_dataFilePathName);
+        if (!dataFilePath) return;
+        _store.dataFilePath = dataFilePath;
+        await loadTasksFromFile();
     }
     catch (e) { console.dir(e); }
 }
 
 export async function openDataFile() {
     try {
-        if (!_store.dataFilePath) throw new Error('No file path specified');
-        const fileContent = await Neutralino.filesystem.readFile(_store.dataFilePath);
-        _store.tasks = JSON.parse(fileContent) as _types.task[];
+        loadTasksFromFile();
     }
     catch (e) { console.dir(e); }
 }
@@ -34,6 +30,17 @@ export async function saveDataFile() {
 }
 
 export async function setDataFilePath(path: string) {
-    _dataFilePath = path;
-    await Neutralino.storage.setData(_dataFilePathName, _dataFilePath);
+    _store.dataFilePath = path;
+    await Neutralino.storage.setData(_dataFilePathName, _store.dataFilePath);
+}
+
+async function loadTasksFromFile() {
+    if (!_store.dataFilePath) throw new Error('No file path specified');
+    const fileContent = await Neutralino.filesystem.readFile(_store.dataFilePath);
+    if (!fileContent) return;
+    const tasks: _types.task[] = JSON.parse(fileContent);
+    _store.tasks = tasks.map((task: any) => {
+        task.datesDone = task.datesDone.map((dateString: string) => new Date(dateString));
+        return task;
+    });
 }
