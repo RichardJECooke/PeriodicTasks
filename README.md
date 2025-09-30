@@ -2,17 +2,19 @@
 
 ## Todo
 
-- mark task as done at any date
-- display task history
-- edit and delete task history
+- display task dates from newest
+- edit and delete task dates
 - add archiving and deletion of tasks
+- mark task as done at any date
 - automatic saving on change with toast
 - display tasks next due date and rank by due date
 - save config file and open it
 - use parcel file exclude plugin - use https://www.npmjs.com/package/parcel-resolver-ignore instead
 - add open source licence file
 - set project to public
-- make same project in gtk4/c and avalonia/c# and gtk4/zig
+- write tests
+- deploy to flatpak
+- make same project in gtk4/c, avalonia/c#, gtk4/zig, rust/something, godot
 
 ## Run
 
@@ -25,11 +27,13 @@ cd ~/code/periodicTaskTracker;
 npm install;
 npx neu update;
 
-rm -rf .parcel-cache/ build/; mkdir build;  mkdir build/js; cp -r resources/. build/; npx parcel watch resources/js/main.ts --dist-dir build --public-url ./;  # can't build the neutralino.js file with parcel or it breaks - todo - use https://www.npmjs.com/package/parcel-resolver-ignore instead
+rm -rf .parcel-cache/ build/; mkdir build;  mkdir build/js; cp -r resources/. build/; npx parcel watch resources/index.html --dist-dir build --public-url ./;
 
 # new terminal:
 npx neu run;
-# npx neu build # for later when deploying
+
+# build to deploy:
+# npx neu build
 ```
 
 ### With Docker
@@ -58,3 +62,7 @@ Alpine doesn't work with neutralino. Must use node-slim
 ```sh
 docker run --init  -it --rm --name "app" -v ".:/app" -w "/app" node:23-slim sh -c  "npx neu create myapp"
 ```
+
+## Notes
+
+- You mustn't build neutralino.js with parcel as it has hardcoded dependencies that mustn't be rewritten. The parcelIgnore plugin is used to exclude it.

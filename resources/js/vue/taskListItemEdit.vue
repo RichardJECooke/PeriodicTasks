@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import * as types from '../types.ts';
 import * as _taskHelper from '../taskHelper.ts';
+import DateListItem from './dateListItem.vue';
 
 const props = defineProps<{ task: types.task, isEditing: boolean }>();
 const emit = defineEmits(['stopEditingEvent']);
@@ -25,6 +26,13 @@ function allowOnlyDigits(event: Event) {
     Archive this task:
     <input type="checkbox" v-bind:checked="props.task.isArchived" />
   </label>
+  <br /><br />
+  Dates completed:
+  <ul id="datesList">
+    <li v-for="date in props.task.datesDone">
+      <DateListItem :key="date" :date="date" />
+    </li>
+  </ul>
   <br />
   <input type="button" v-on:click="stopEditing" value="Done" />
 </template>
