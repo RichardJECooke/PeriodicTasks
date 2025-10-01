@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import * as types from '../types.ts';
-import * as _taskHelper from '../taskHelper.ts';
+import * as types from '../0types.ts';
+import * as _taskHelper from '../4taskHelper.ts';
 import DateListItem from './dateListItem.vue';
 
 const props = defineProps<{ task: types.task, isEditing: boolean }>();

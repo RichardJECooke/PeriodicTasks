@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import * as types from '../types.ts';
-import * as _taskHelper from '../taskHelper.ts';
-import * as _baseHelper from '../baseHelper.ts';
+import * as types from '../0types.ts';
+import * as _taskHelper from '../4taskHelper.ts';
+import * as _baseHelper from '../2baseHelper.ts';
 
 const props = defineProps<{ date: Date }>();
 

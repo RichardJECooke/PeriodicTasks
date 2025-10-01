@@ -1,5 +1,5 @@
-import * as _fileHelper from './fileHelper.ts';
-import * as _ui from './ui.ts';
+import * as _fileHelper from './5fileHelper.ts';
+import * as _ui from './6ui.ts';
 
 start();
 

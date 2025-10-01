@@ -1,8 +1,8 @@
 <script setup lang="ts">
 
-import * as _constants from '../constants.ts';
-import { store as _store } from '../store.ts';
-import * as _fileHelper from '../fileHelper.ts';
+import * as _constants from '../1constants.ts';
+import { store as _store } from '../3store.ts';
+import * as _fileHelper from '../5fileHelper.ts';
 
 async function chooseSaveFileLocation() {
     try {

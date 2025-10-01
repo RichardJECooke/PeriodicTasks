@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import * as vue from 'vue';
-import * as types from '../types.ts';
-import * as _taskHelper from '../taskHelper.ts';
+import * as types from '../0types.ts';
+import * as _taskHelper from '../4taskHelper.ts';
 import TaskListItemEdit from './taskListItemEdit.vue';
 
 const props = defineProps<{task: types.task}>();
@@ -23,7 +23,6 @@ function stopEditing() { isEditing.value = false; }
 </script>
 
 <template>
-<li>
 <!-- Readonly -->
   <div v-if="!isEditing"  >
     <input type="checkbox" id="doneToday" v-bind:checked="isDoneToday" v-on:change="handleMarkDone"/>
@@ -43,6 +42,4 @@ function stopEditing() { isEditing.value = false; }
 <!-- Editing   -->
   <TaskListItemEdit v-if="isEditing" :key="props.task.id" :task="props.task"
      :isEditing="isEditing" @stopEditingEvent="stopEditing" />
-</li>
-<br />
 </template>

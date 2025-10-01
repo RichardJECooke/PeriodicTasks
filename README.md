@@ -2,7 +2,6 @@
 
 ## Todo
 
-- display task dates from newest
 - edit and delete task dates
 - add archiving and deletion of tasks
 - mark task as done at any date

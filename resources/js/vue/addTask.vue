@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import * as _taskHelper from '../taskHelper.ts';
+import * as _taskHelper from '../4taskHelper.ts';
 
 async function addTask() {
   _taskHelper.addTask();

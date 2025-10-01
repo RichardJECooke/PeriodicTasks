@@ -1,14 +1,20 @@
 import {v4 as _uuid} from 'uuid';
-import * as _constants from './constants.js';
-import * as types from './types.ts';
-import {store as _store} from './store.ts';
+import * as _constants from './1constants.js';
+import * as _types from './0types.ts';
+import {store as _store} from './3store.ts';
 
 export async function addTask(): Promise<void> {
-  const task: types.task = {'id': _uuid(), 'name': 'newtask', 'days': 1, isArchived: false, datesDone: []};
+  const task: _types.task = {'id': _uuid(), 'name': 'newtask', 'days': 1, isArchived: false, datesDone: []};
   _store.tasks.push(task);
+  _store.tasks.forEach(task => { task.datesDone.sort((a, b) => b.getTime() - a.getTime()); });
 }
 
-export function getNumDaysUntilDue(task : types.task): number {
+export function setTasks(tasks: _types.task[]) {
+  tasks.forEach(task => { task.datesDone.sort((a, b) => b.getTime() - a.getTime()); });
+  _store.tasks = tasks;
+}
+
+export function getNumDaysUntilDue(task : _types.task): number {
   if (task.datesDone.length == 0) return 0;
   const lastDoneDate = task.datesDone.toSorted((a, b) => b.getTime() - a.getTime())[0];
   lastDoneDate.setHours(0, 0, 0, 0);
@@ -23,7 +29,7 @@ export function getToday(): Date {
   return today;
 }
 
-export function addDoneToday(task: types.task): void {
+export function addDoneToday(task: _types.task): void {
   task.datesDone.push(getToday());
 }
 
@@ -33,7 +39,7 @@ export function isSameDay (first: Date, second: Date): boolean {
   first.getDate() === second.getDate());
 }
 
-export function removeDoneToday(task: types.task): void {
+export function removeDoneToday(task: _types.task): void {
   const today = getToday();
   task.datesDone = task.datesDone.filter(date => !isSameDay(date, today));
 }
