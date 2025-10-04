@@ -15,7 +15,7 @@ function handleMarkDone(event: Event) {
 }
 const isDoneToday = vue.computed(() => {
   const today = _taskHelper.getToday();
-  return props.task.datesDone.some((date) => _taskHelper.isSameDay(new Date(date), today));
+  return props.task.datesDone.some((date) => _taskHelper.isSameDay(new Date(date.date), today));
 });
 
 function startEditing() { isEditing.value = true; }

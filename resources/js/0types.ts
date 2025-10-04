@@ -1,9 +1,11 @@
+export type idAndDate = { id: string; date: Date }
+
 export type task = {
   id: string;
   name: string;
   days: number;
   isArchived: boolean;
-  datesDone: Date[];
+  datesDone: idAndDate[];
 }
 
 export type store = {

@@ -12,6 +12,7 @@ function allowOnlyDigits(event: Event) {
   input.value = input.value.replace(/[^0-9]/g, '');
   props.task.days = Number(input.value) || 1;
 }
+function deleteDate(index: number) { props.task.datesDone.splice(index, 1); }
 </script>
 
 <template>
@@ -29,8 +30,8 @@ function allowOnlyDigits(event: Event) {
   <br /><br />
   Dates completed:
   <ul id="datesList">
-    <li v-for="date in props.task.datesDone">
-      <DateListItem :key="date" :date="date" />
+    <li v-for="(date, index) in props.task.datesDone">
+      <DateListItem :key="date.id" :date="date.date" :index=index v-on:deleteDateEvent="deleteDate" />
     </li>
   </ul>
   <br />

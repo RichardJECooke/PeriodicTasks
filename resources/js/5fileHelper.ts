@@ -41,7 +41,7 @@ async function loadTasksFromFile() {
     if (!fileContent) return;
     const tasks: _types.task[] = JSON.parse(fileContent);
     const tasksWithDates = tasks.map((task: any) => {
-        task.datesDone = task.datesDone.map((dateString: string) => new Date(dateString));
+        task.datesDone = task.datesDone.map((date: _types.idAndDate) => ({ id: date.id, date: new Date(date.date) }));
         return task;
     });
     _taskHelper.setTasks(tasksWithDates);
