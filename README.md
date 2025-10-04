@@ -2,7 +2,7 @@
 
 ## Todo
 
-- edit and delete task dates
+- edit task dates
 - add archiving and deletion of tasks
 - mark task as done at any date
 - automatic saving on change with toast
