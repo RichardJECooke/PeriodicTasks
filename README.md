@@ -2,13 +2,11 @@
 
 ## Todo
 
-- edit task dates
-- add archiving and deletion of tasks
-- mark task as done at any date
-- automatic saving on change with toast
 - display tasks next due date and rank by due date
+- automatic saving on change with toast
+- mark task as done at any date
+- add archiving and deletion of tasks
 - save config file and open it
-- use parcel file exclude plugin - use https://www.npmjs.com/package/parcel-resolver-ignore instead
 - add open source licence file
 - set project to public
 - write tests

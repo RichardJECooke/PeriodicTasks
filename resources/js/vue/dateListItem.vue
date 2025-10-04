@@ -5,7 +5,8 @@ import * as _taskHelper from '../4taskHelper.ts';
 import * as _baseHelper from '../2baseHelper.ts';
 
 const props = defineProps<{"date": Date, "index": number}>();
-const dateString = computed(() => { return props.date.toISOString().slice(0, 10); });
+// const dateString = computed(() => { return props.date.toISOString().slice(0, 10); });
+const dateString = computed(() => { return _baseHelper.getDateFromDate(props.date); });
 const emit = defineEmits(['deleteDateEvent', 'updateDateEvent']);
 
 function deleteDate() { emit('deleteDateEvent', props.index); }
