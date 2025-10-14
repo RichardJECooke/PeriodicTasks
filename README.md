@@ -2,7 +2,6 @@
 
 ## Todo
 
-- display tasks next due date and rank by due date
 - automatic saving on change with toast
 - mark task as done at any date
 - add archiving and deletion of tasks
