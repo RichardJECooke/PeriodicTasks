@@ -6,21 +6,41 @@ import {store as _store} from './3store.ts';
 
 const _dataFilePathName = 'dataFilePath';
 
-export async function loadPreviouslyUsedDataFile() {
+export async function startup(): Promise<string> {
+    try {
+    const err = await Neutralino.filesystem.createDirectory(_constants.configFolder);
+    todo load config file
+    const err2 = await loadPreviouslyUsedDataFile();
+    return err + err2;
+    }
+    catch (e) {
+        console.dir(e);
+        return (e as Error).message;
+    }
+}
+
+export async function loadPreviouslyUsedDataFile(): Promise<string> {
     try {
         const dataFilePath = await Neutralino.storage.getData(_dataFilePathName);
         if (!dataFilePath) return;
         _store.dataFilePath = dataFilePath;
         await loadTasksFromFile();
+        return '';
     }
-    catch (e) { console.dir(e); }
+    catch (e) {
+        console.dir(e);
+        return (e as Error).message;
+    }
 }
 
 export async function openDataFile() {
     try {
         loadTasksFromFile();
     }
-    catch (e) { console.dir(e); }
+    catch (e) {
+        console.dir(e);
+        return (e as Error).message;
+    }
 }
 
 export async function saveDataFile() {
@@ -28,7 +48,10 @@ export async function saveDataFile() {
         if (!_store.dataFilePath) throw new Error('No file path specified');
         await Neutralino.filesystem.writeFile(_store.dataFilePath, JSON.stringify(_store.tasks, null, 4));
     }
-    catch (e) { console.dir(e); }
+    catch (e) {
+        console.dir(e);
+        return (e as Error).message;
+    }
 }
 
 export async function setDataFilePath(path: string) {

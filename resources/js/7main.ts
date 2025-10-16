@@ -10,13 +10,12 @@ async function start() {
     exitIfNotLinux();
     // (window as any)._ui = _ui; // so html can call ui
     _ui.start();
-    await _fileHelper.loadPreviouslyUsedDataFile();
+    const error = await _fileHelper.startup();
+    if (error) window.alert(error);
     // startNeutralinoEvents();
   }
   catch (e) { console.dir(e); }
 }
-
-
 
 // Old neutralino sample code: -----
 
