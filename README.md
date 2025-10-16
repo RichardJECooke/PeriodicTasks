@@ -2,15 +2,15 @@
 
 ## Todo
 
-- automatic saving on change with toast
-- mark task as done at any date
 - add archiving and deletion of tasks
 - save config file and open it
+- display errors in toasts
+- write tests
+---
+- make same project in gtk4/c, avalonia/c#, gtk4/zig, rust/something, godot
 - add open source licence file
 - set project to public
-- write tests
 - deploy to flatpak
-- make same project in gtk4/c, avalonia/c#, gtk4/zig, rust/something, godot
 
 ## Run
 

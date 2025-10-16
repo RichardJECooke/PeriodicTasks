@@ -1,3 +1,4 @@
+import { watch as _watch} from 'vue';
 import * as _constants from './1constants.ts';
 import * as _types from './0types.ts';
 import * as _taskHelper from './4taskHelper.ts';
@@ -46,3 +47,5 @@ async function loadTasksFromFile() {
     });
     _taskHelper.setTasks(tasksWithDates);
 }
+
+_watch(_store, async (newStore, oldStore) => { await saveDataFile(); });
