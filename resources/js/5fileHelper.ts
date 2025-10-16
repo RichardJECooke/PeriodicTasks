@@ -26,7 +26,7 @@ export async function openDataFile() {
 export async function saveDataFile() {
     try {
         if (!_store.dataFilePath) throw new Error('No file path specified');
-        await Neutralino.filesystem.writeFile(_store.dataFilePath, JSON.stringify(_store.tasks));
+        await Neutralino.filesystem.writeFile(_store.dataFilePath, JSON.stringify(_store.tasks, null, 4));
     }
     catch (e) { console.dir(e); }
 }

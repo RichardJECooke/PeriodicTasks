@@ -4,7 +4,6 @@
 
 - save config file and open it
 - display errors in toasts
-- format js before saving tasks
 - export file
 - import file
 - style
