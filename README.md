@@ -2,9 +2,12 @@
 
 ## Todo
 
-- add archiving and deletion of tasks
 - save config file and open it
 - display errors in toasts
+- format js before saving tasks
+- export file
+- import file
+- style
 - write tests
 ---
 - make same project in gtk4/c, avalonia/c#, gtk4/zig, rust/something, godot

@@ -9,6 +9,10 @@ export async function addTask(): Promise<void> {
   _store.tasks.forEach(task => { task.datesDone.sort((a, b) => b.date.getTime() - a.date.getTime()); });
 }
 
+export function deleteTask(taskToDelete: _types.task): void {
+  _store.tasks = _store.tasks.filter(task => task.id !== taskToDelete.id);
+}
+
 export function setTasks(tasks: _types.task[]) {
   tasks.forEach(task => { task.datesDone.sort((a, b) => b.date.getTime() - a.date.getTime()); });
   _store.tasks = tasks;

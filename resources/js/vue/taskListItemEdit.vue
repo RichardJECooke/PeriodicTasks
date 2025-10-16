@@ -24,15 +24,12 @@ function updateDate(index: number, newDate: Date) { props.task.datesDone[index].
     days
   </span>
   <br />
-  <label>
-    Archive this task:
-    <input type="checkbox" v-bind:checked="props.task.isArchived" />
-  </label>
+  <input type="button" @click="props.task.isArchived = true" value="Archive this task">
   <br /><br />
   Dates completed:
   <ul id="datesList">
     <li v-for="(date, index) in props.task.datesDone">
-      <DateListItem :key="date.id" :date="date.date" :index=index v-on:deleteDateEvent="deleteDate"  v-on:updateDateEvent="updateDate" />
+      <DateListItem :key="date.id" :date="date.date" v-bind:index=index v-on:deleteDateEvent="deleteDate"  v-on:updateDateEvent="updateDate" />
     </li>
   </ul>
   <br />
