@@ -1,4 +1,4 @@
-export const configFolder = '~/.config/info.richardcooke.PeriodicTasks';
-export const configFile = configFolder + '/config.json';
-export const defaultDataFilePath = configFolder + '/tasks.json';
+export const configFolderPath = 'info.richardcooke.PeriodicTasks';
+export const configFilePath = configFolderPath + '/config.json';
+export const defaultDataFilePath = configFolderPath + '/tasks.json';
 

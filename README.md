@@ -2,17 +2,18 @@
 
 ## Todo
 
-- save config file and open it
 - display errors in toasts
 - export file
 - import file
 - synchronize files on save
 - show notifications when task due today
 - add minimize to taskbar with quit and restore menu items
--
 - add help/tips
 - style
 - write tests
+- decide on versioning scheme and set version number
+- update readme
+- update neutralino.config
 ---
 - make same project in gtk4/c, avalonia/c#, gtk4/zig, rust/something, godot
 - add open source licence file

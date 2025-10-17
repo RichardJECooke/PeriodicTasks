@@ -16,10 +16,8 @@
   },
   "nativeAllowList": [
     "app.exit",
-    "filesystem.readFile",
-    "filesystem.writeFile",
-    "os.showMessageBox", "os.showSaveDialog", "os.showOpenDialog",
-    "storage.setData", "storage.getData"
+    "filesystem.createDirectory", "filesystem.readDirectory", "filesystem.readFile", "filesystem.writeFile",
+    "os.getPath", "os.showMessageBox", "os.showSaveDialog", "os.showOpenDialog"
   ],
   "globalVariables": {
     "TEST1": "Hello",
