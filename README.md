@@ -6,6 +6,11 @@
 - display errors in toasts
 - export file
 - import file
+- synchronize files on save
+- show notifications when task due today
+- add minimize to taskbar with quit and restore menu items
+-
+- add help/tips
 - style
 - write tests
 ---

@@ -17,7 +17,7 @@ async function saveDataFile() {
     try {
         if (!_store.dataFilePath) chooseSaveFileLocation();
         if (!_store.dataFilePath) return;
-        await _fileHelper.saveDataFile();
+        await _fileHelper.writeDataFile();
     }
     catch (e) { console.dir(e); }
 }

@@ -9,7 +9,7 @@ async function openDataFile() {
     await chooseOpenFileLocation();
     if (!_store.dataFilePath) return;
     _fileHelper.setDataFilePath(_store.dataFilePath);
-    await _fileHelper.openDataFile();
+    await _fileHelper.readDataFile();
   }
   catch (e) { console.dir(e); }
 }

@@ -4,7 +4,7 @@ import * as types from '../0types.ts';
 import * as _taskHelper from '../4taskHelper.ts';
 import TaskListItemEdit from './taskListItemEdit.vue';
 
-const props = defineProps<{task: types.task}>();
+const props = defineProps<{task: types.ttask}>();
 let isEditing: vue.Ref<boolean> = vue.ref(false);
 const getNumDaysUntilDue = _taskHelper.getNumDaysUntilDue; // entire file imports are not available in the template
 

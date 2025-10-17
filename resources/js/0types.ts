@@ -1,14 +1,20 @@
-export type idAndDate = { id: string; date: Date }
+export type tidAndDate = { id: string; date: Date }
 
-export type task = {
+export type ttask = {
   id: string;
   name: string;
   days: number;
   isArchived: boolean;
-  datesDone: idAndDate[];
+  datesDone: tidAndDate[];
 }
 
-export type store = {
-  tasks: task[],
-  dataFilePath: string | null
+export type tconfig = {
+  dataFilePath: string
+  shouldNotify: boolean;
+  shouldMinimizeToTrayOnQuit: boolean
+}
+
+export type tstore = {
+  tasks: ttask[];
+  config: tconfig;
 }

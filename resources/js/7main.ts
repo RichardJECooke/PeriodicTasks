@@ -4,17 +4,13 @@ import * as _ui from './6ui.ts';
 start();
 
 async function start() {
-  try {
-    await Neutralino.init();
-    Neutralino.events.on("windowClose", onWindowClose);
-    exitIfNotLinux();
-    // (window as any)._ui = _ui; // so html can call ui
-    _ui.start();
-    const error = await _fileHelper.startup();
-    if (error) window.alert(error);
-    // startNeutralinoEvents();
-  }
-  catch (e) { console.dir(e); }
+  await Neutralino.init();
+  Neutralino.events.on("windowClose", onWindowClose);
+  exitIfNotLinux();
+  _ui.start();
+  try { await _fileHelper.startup(); }
+  catch (e) { await Neutralino.app.exit(1); }
+  // startNeutralinoEvents();
 }
 
 // Old neutralino sample code: -----

@@ -3,7 +3,7 @@ import * as types from '../0types.ts';
 import * as _taskHelper from '../4taskHelper.ts';
 import DateListItem from './dateListItem.vue';
 
-const props = defineProps<{ task: types.task, isEditing: boolean }>();
+const props = defineProps<{ task: types.ttask, isEditing: boolean }>();
 const emit = defineEmits(['stopEditingEvent']);
 
 function stopEditing() { emit('stopEditingEvent'); }
