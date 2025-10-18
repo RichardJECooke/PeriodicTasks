@@ -14,7 +14,7 @@ export async function startup(): Promise<void> {
   catch (e) { console.error('Error message: ' + JSON.stringify(e)); throw e; }
   try { await readDataFile(); }
   catch (e) { await writeDataFile(); }
-  _watch(() => _store.tasks,  async (tasks)  => { await writeDataFile();   }, { deep: true });
+  _watch(() => _store.taskGroups,  async (tasks)  => { await writeDataFile();   }, { deep: true });
 }
 
 export async function readDataFile(): Promise<void> {
@@ -22,12 +22,12 @@ export async function readDataFile(): Promise<void> {
     if (!_store.config.dataFilePath) throw new Error('No data file path specified');
     const fileContent = await Neutralino.filesystem.readFile(_store.config.dataFilePath);
     if (!fileContent) return;
-    const tasks: _types.ttask[] = JSON.parse(fileContent);
-    const tasksWithDates = tasks.map((task: any) => {
-      task.datesDone = task.datesDone.map((date: _types.tidAndDate) => ({ id: date.id, date: new Date(date.date) }));
+    const taskFile: _types.tTaskGroup = JSON.parse(fileContent);
+    taskFile.tasks = taskFile.tasks.map((task: any) => {
+      task.datesDone = task.datesDone.map((date: _types.tIdAndDate) => ({ id: date.id, date: new Date(date.date) }));
       return task;
     });
-    _taskHelper.setTasks(tasksWithDates);
+    _taskHelper.setTaskFile(taskFile);
   }
   catch (e) { console.log('Cannot read data file, but is not an error at first startup: ' + JSON.stringify(e)); throw e; }
 }
@@ -42,7 +42,7 @@ export async function writeConfigFile(): Promise<void> {
 export async function writeDataFile(): Promise<void> {
   try {
     if (!_store.config.dataFilePath) throw new Error('No file path specified');
-    await Neutralino.filesystem.writeFile(_store.config.dataFilePath, JSON.stringify(_store.tasks, null, 4));
+    await Neutralino.filesystem.writeFile(_store.config.dataFilePath, JSON.stringify(_store.taskGroups[0], null, 4));
   }
   catch (e) { console.error('Error message: ' + JSON.stringify(e)); throw e; }
 }

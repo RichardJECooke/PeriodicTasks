@@ -4,7 +4,7 @@ import * as types from '../0types.ts';
 import * as _taskHelper from '../4taskHelper.ts';
 import TaskListItemEdit from './taskListItemEdit.vue';
 
-const props = defineProps<{task: types.ttask}>();
+const props = defineProps<{task: types.tTask}>();
 
 function deleteTask() {
   _taskHelper.deleteTask(props.task);
