@@ -6,7 +6,7 @@ import * as _fileHelper from '../5fileHelper.ts';
 
 async function chooseSaveFileLocation() {
     try {
-        const filePath = await Neutralino.os.showSaveDialog('Save your tasks', { "defaultPath": _constants.defaultSavePath });
+        const filePath = await Neutralino.os.showSaveDialog('Save your tasks', { "defaultPath": _constants.defaultDataFilePath });
         if (!filePath) return;
         _fileHelper.setDataFilePath(filePath);
     }
@@ -15,8 +15,8 @@ async function chooseSaveFileLocation() {
 
 async function saveDataFile() {
     try {
-        if (!_store.dataFilePath) chooseSaveFileLocation();
-        if (!_store.dataFilePath) return;
+        if (!_store.config.dataFilePath) chooseSaveFileLocation();
+        if (!_store.config.dataFilePath) return;
         await _fileHelper.writeDataFile();
     }
     catch (e) { console.dir(e); }

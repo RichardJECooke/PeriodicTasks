@@ -35,6 +35,9 @@ rm -rf .parcel-cache/ build/; mkdir build;  mkdir build/js; cp -r resources/. bu
 # new terminal:
 npx neu run;
 
+# check for errors:
+npx -p typescript tsc --noEmit
+
 # build to deploy:
 # npx neu build
 ```
