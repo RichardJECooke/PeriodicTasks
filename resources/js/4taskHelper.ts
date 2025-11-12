@@ -23,7 +23,8 @@ export function getNumDaysUntilDue(task : _types.tTask): number {
   lastDoneDate.date.setHours(0, 0, 0, 0);
   const msPerDay = 1000 * 60 * 60 * 24;
   const daysSinceLastDone = Math.floor((getToday().getTime() - lastDoneDate.date.getTime()) / msPerDay);
-  return task.days - daysSinceLastDone;
+  const result = task.days - daysSinceLastDone;
+  return result;
 }
 
 export function getToday(): Date {
@@ -34,6 +35,7 @@ export function getToday(): Date {
 
 export function addDoneToday(task: _types.tTask): void {
   task.datesDone.push({id: crypto.randomUUID(), date: getToday()});
+  _store.taskGroups[0].tasks.forEach(task => { task.datesDone.sort((a, b) => b.date.getTime() - a.date.getTime()); });
 }
 
 export function isSameDay (first: Date, second: Date): boolean {
@@ -45,10 +47,12 @@ export function isSameDay (first: Date, second: Date): boolean {
 export function removeDoneToday(task: _types.tTask): void {
   const today = getToday();
   task.datesDone = task.datesDone.filter(date => !isSameDay(date.date, today));
+  _store.taskGroups[0].tasks.forEach(task => { task.datesDone.sort((a, b) => b.date.getTime() - a.date.getTime()); });
 }
 
 export function removeDate(dateId: string): void {
   _store.taskGroups[0].tasks.forEach(task => {
     task.datesDone = task.datesDone.filter(date => date.id !== dateId);
   });
+  _store.taskGroups[0].tasks.forEach(task => { task.datesDone.sort((a, b) => b.date.getTime() - a.date.getTime()); });
 }

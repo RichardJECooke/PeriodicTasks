@@ -2,10 +2,10 @@
 
 ## Todo
 
+- synchronize files on save - watch file for changes and update.
 - display errors in toasts
 - export file
 - import file
-- synchronize files on save
 - show notifications when task due today
 - add minimize to taskbar with quit and restore menu items
 - add help/tips
@@ -15,7 +15,7 @@
 - update readme
 - update neutralino.config
 ---
-- make same project in gtk4/c, avalonia/c#, gtk4/zig, rust/something, godot
+- make same project in c/nuklear, gtk4/c, avalonia/c#, gtk4/zig, rust/something, godot
 - add open source licence file
 - set project to public
 - deploy to flatpak
@@ -27,10 +27,9 @@ Run in top level: periodicTaskTracker folder
 ### With Node directly on host - use this
 
 ```sh
-cd ~/code/periodicTaskTracker;
+cd ~/code/PeriodicTasks;
 npm install;
 npx neu update;
-
 rm -rf .parcel-cache/ build/; mkdir build;  mkdir build/js; cp -r resources/. build/; npx parcel watch resources/index.html --dist-dir build --public-url ./;
 
 # new terminal:

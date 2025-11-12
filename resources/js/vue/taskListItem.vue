@@ -32,9 +32,9 @@ function stopEditing() { isEditing.value = false; }
     ·
     Due
     <span v-if="getNumDaysUntilDue(props.task) == 0">today</span>
-    <span v-if="getNumDaysUntilDue(props.task) <-1">{{ getNumDaysUntilDue(props.task) }} days ago</span>
-    <span v-if="getNumDaysUntilDue(props.task) <0 && getNumDaysUntilDue(props.task) >-1">{{ getNumDaysUntilDue(props.task) }} day ago</span>
-    <span v-if="getNumDaysUntilDue(props.task) >0 && getNumDaysUntilDue(props.task) <1">in {{ getNumDaysUntilDue(props.task) }} day</span>
+    <span v-if="getNumDaysUntilDue(props.task) <-1">{{ -1*getNumDaysUntilDue(props.task) }} days ago</span>
+    <span v-if="getNumDaysUntilDue(props.task) <0 && getNumDaysUntilDue(props.task) >-1">{{ -1*getNumDaysUntilDue(props.task) }} day ago</span>
+    <span v-if="getNumDaysUntilDue(props.task) >0 && getNumDaysUntilDue(props.task) <=1">in {{ getNumDaysUntilDue(props.task) }} day</span>
     <span v-if="getNumDaysUntilDue(props.task) >1">in {{ getNumDaysUntilDue(props.task) }} days</span>
     &nbsp;&nbsp;
     <input type="button" v-on:click="startEditing" value="Edit" />
