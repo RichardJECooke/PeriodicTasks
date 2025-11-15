@@ -3,6 +3,8 @@
 ## Todo
 
 - synchronize files on save - watch file for changes and update.
+  - at start/open file/save file, stop watching any other files and start watching that file
+  - if that file changes, reload the tasks from it
 - display errors in toasts
 - export file
 - import file

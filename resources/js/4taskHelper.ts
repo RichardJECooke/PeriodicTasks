@@ -5,7 +5,7 @@ import {store as _store} from './3store.ts';
 export async function addTask(): Promise<void> {
   const task: _types.tTask = {'id': crypto.randomUUID(), 'name': 'newtask', 'days': 1, isArchived: false, datesDone: []};
   _store.taskGroups[0].tasks.push(task);
-  _store.taskGroups[0].tasks.forEach(task => { task.datesDone.sort((a, b) => b.date.getTime() - a.date.getTime()); });
+  sortTasks();
 }
 
 export function deleteTask(taskToDelete: _types.tTask): void {
@@ -13,7 +13,7 @@ export function deleteTask(taskToDelete: _types.tTask): void {
 }
 
 export function setTaskFile(taskFile: _types.tTaskGroup): void {
-  taskFile.tasks.forEach(task => { task.datesDone.sort((a, b) => b.date.getTime() - a.date.getTime()); });
+  sortTasks();
   _store.taskGroups[0] = taskFile;
 }
 
@@ -35,7 +35,7 @@ export function getToday(): Date {
 
 export function addDoneToday(task: _types.tTask): void {
   task.datesDone.push({id: crypto.randomUUID(), date: getToday()});
-  _store.taskGroups[0].tasks.forEach(task => { task.datesDone.sort((a, b) => b.date.getTime() - a.date.getTime()); });
+  sortTasks();
 }
 
 export function isSameDay (first: Date, second: Date): boolean {
@@ -47,12 +47,16 @@ export function isSameDay (first: Date, second: Date): boolean {
 export function removeDoneToday(task: _types.tTask): void {
   const today = getToday();
   task.datesDone = task.datesDone.filter(date => !isSameDay(date.date, today));
-  _store.taskGroups[0].tasks.forEach(task => { task.datesDone.sort((a, b) => b.date.getTime() - a.date.getTime()); });
+  sortTasks();
 }
 
 export function removeDate(dateId: string): void {
   _store.taskGroups[0].tasks.forEach(task => {
     task.datesDone = task.datesDone.filter(date => date.id !== dateId);
   });
+  sortTasks();
+}
+
+function sortTasks() {
   _store.taskGroups[0].tasks.forEach(task => { task.datesDone.sort((a, b) => b.date.getTime() - a.date.getTime()); });
 }

@@ -17,6 +17,13 @@ export async function startup(): Promise<void> {
   _watch(() => _store.taskGroups,  async (tasks)  => { await writeDataFile();   }, { deep: true });
 }
 
+export async function writeConfigFile(): Promise<void> {
+  try {
+    await Neutralino.filesystem.writeFile(_configFolderPath + '/' + _constants.configFilePath, JSON.stringify(_store.config, null, 4));
+  }
+  catch (e) { console.error('Error message: ' + JSON.stringify(e)); throw e; }
+}
+
 export async function readDataFile(): Promise<void> {
   try {
     if (!_store.config.dataFilePath) throw new Error('No data file path specified');
@@ -30,13 +37,6 @@ export async function readDataFile(): Promise<void> {
     _taskHelper.setTaskFile(taskFile);
   }
   catch (e) { console.log('Cannot read data file, but is not an error at first startup: ' + JSON.stringify(e)); throw e; }
-}
-
-export async function writeConfigFile(): Promise<void> {
-  try {
-    await Neutralino.filesystem.writeFile(_configFolderPath + '/' + _constants.configFilePath, JSON.stringify(_store.config, null, 4));
-  }
-  catch (e) { console.error('Error message: ' + JSON.stringify(e)); throw e; }
 }
 
 export async function writeDataFile(): Promise<void> {
