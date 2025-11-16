@@ -17,7 +17,7 @@
 - update readme
 - update neutralino.config
 ---
-- make same project in c/nuklear, gtk4/c, avalonia/c#, gtk4/zig, rust/something, godot
+- make same project in fyne/go, gtk4/ts, avalonia/c#
 - add open source licence file
 - set project to public
 - deploy to flatpak
@@ -74,3 +74,7 @@ docker run --init  -it --rm --name "app" -v ".:/app" -w "/app" node:23-slim sh -
 ## Notes
 
 - You mustn't build neutralino.js with parcel as it has hardcoded dependencies that mustn't be rewritten. The parcelIgnore plugin is used to exclude it.
+
+## History
+
+- First tried Neutralino.js. Little things like file picker file extension filter didn't work. Then big things like file watcher didn't work. Gave up. Next trying Fyne and Go.

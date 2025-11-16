@@ -16,7 +16,7 @@
   },
   "nativeAllowList": [
     "app.exit",
-    "filesystem.createDirectory", "filesystem.readDirectory", "filesystem.readFile", "filesystem.writeFile",
+    "filesystem.createDirectory", "filesystem.readDirectory", "filesystem.readFile", "filesystem.writeFile", "filesystem.createWatcher", "filesystem.removeWatcher",
     "os.getPath", "os.showMessageBox", "os.showSaveDialog", "os.showOpenDialog"
   ],
   "globalVariables": {
