@@ -44,7 +44,8 @@ export async function writeDataFile(): Promise<void> {
     if (!_store.config.dataFilePath) throw new Error('No file path specified');
     await Neutralino.filesystem.writeFile(_store.config.dataFilePath, JSON.stringify(_store.taskGroups[0], null, 4));
 
-    let watcherId = await Neutralino.filesystem.createWatcher(_store.config.dataFilePath);
+    // TODO ERROR
+    let watcherId = await Neutralino.filesystem.createWatcher(_store.config.dataFilePath); // '/home/me/.config/info.richardcooke.PeriodicTasks/tasks.json'
     // Neutralino.events.on('watchFile', (evt) => {if (watcherId == evt.detail.id) {console.log(evt.detail);}});
     // await Neutralino.filesystem.removeWatcher(watcherId);
   }
