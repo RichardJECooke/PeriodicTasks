@@ -2,7 +2,9 @@
 
 Each top level folder is the same app written in a different framework.
 
+## Notes
 
+For .NET version, use flatpak https://github.com/flathub/org.freedesktop.Sdk.Extension.dotnet9
 
 ## History
 

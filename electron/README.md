@@ -21,6 +21,7 @@ Each top level folder is the same app written in a different framework.
 - decide on versioning scheme and set version number
 - update readme
 - update neutralino.config
+- bundle with flatpak
 ---
 - make same project in fyne/go, gtk4/ts, avalonia/c#
 - add open source licence file
