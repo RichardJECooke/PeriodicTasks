@@ -2,7 +2,6 @@
 
 Each top level folder is the same app written in a different framework.
 
-Fyne is the best one and used for release.
 
 ## Todo
 
@@ -29,7 +28,7 @@ Fyne is the best one and used for release.
 ## Run
 
 ```sh
-cd ~/code/PeriodicTasks/fyne;
+cd ~/code/PeriodicTasks/electron;
 ```
 
 ## History
