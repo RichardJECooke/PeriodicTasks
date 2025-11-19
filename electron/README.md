@@ -5,6 +5,8 @@ Each top level folder is the same app written in a different framework.
 
 ## Todo
 
+- use esm imports - https://www.electronjs.org/docs/latest/tutorial/esm
+- convert my neutralino code to node/renderer separation
 - synchronize files on save - watch file for changes and update.
   - at start/open file/save file, stop watching any other files and start watching that file
   - if that file changes, reload the tasks from it
