@@ -2,7 +2,7 @@
   "name": "periodictasks",
   "version": "1.0.0",
   "description": "Periodic task tracking app (tasks repeat based on last completion date)",
-  "main": "main.js",
+  "main": "./resources/ts/main.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/RichardJECooke/PeriodicTasks.git"
