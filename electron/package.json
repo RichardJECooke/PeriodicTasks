@@ -1,14 +1,14 @@
 {
-  "name": "periodictasks",
-  "version": "1.0.0",
+  "author": "Richard JE Cooke",
   "description": "Periodic task tracking app (tasks repeat based on last completion date)",
+  "license": "GPL-3.0-only",
   "main": "./resources/ts/main.js",
+  "name": "periodictasks",
   "repository": {
     "type": "git",
     "url": "https://github.com/RichardJECooke/PeriodicTasks.git"
   },
-  "author": "Richard JE Cooke",
-  "license": "GPL-3.0-only",
+  "version": "1.0.0",
   "devDependencies": {
     "electron": "^39.2.2"
   }
