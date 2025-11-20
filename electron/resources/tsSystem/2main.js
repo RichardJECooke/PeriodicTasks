@@ -1,5 +1,7 @@
 const path = require('node:path');
-const { app, BrowserWindow, ipcMain } = require('electron/main');
+const { app, BrowserWindow, ipcMain, Menu } = require('electron/main');
+
+Menu.setApplicationMenu(null);
 
 app.whenReady().then(() => { // don't change to .on or start breaks https://github.com/electron/electron/pull/21972
   if (process.platform !== 'linux') app.quit();

@@ -7,3 +7,9 @@ information.innerText = s;
 }
 
 d();
+
+//  _ui.start();
+//   try { await _fileHelper.startup(); }
+//   catch (e) {
+//     console.error('Error message: ' + JSON.stringify(e));
+//     await Neutralino.app.exit(1); }

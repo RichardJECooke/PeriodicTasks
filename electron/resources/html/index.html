@@ -4,12 +4,15 @@
     <meta charset="UTF-8" />
     <meta http-equiv="Content-Security-Policy"   content="default-src 'self'; script-src 'self'" />
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
-    <title>Hello from Electron renderer!</title>
+    <title>Periodic Task Tracker</title>
+    <link rel="stylesheet" href="css/main.css">
   </head>
   <body>
     <h1>Hello from Electron renderer!</h1>
     <p>👋</p>
     <p id="info"></p>
-    </body>
-    <script src="../ts/renderer.js"></script>
+    <div id="app"></div>
+  </body>
+  <script src="../tsBrowser/main.js"></script>
+  <!-- <script type="module" src="../tsBrowser/main.js"></script> -->
 </html>
