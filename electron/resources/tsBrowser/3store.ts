@@ -1,6 +1,6 @@
 import { reactive } from 'vue';
-import * as _types from './0types.ts';
-import * as _constants from './1constants.ts';
+import * as _types from '../tsCommon/0types.ts';
+import * as _constants from '../tsCommon/0types.ts';
 
 
 export const store = reactive<_types.tStore>({

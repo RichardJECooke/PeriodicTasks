@@ -6,11 +6,11 @@ const currentDir = path.dirname(fileURLToPath(import.meta.url));
 
 Menu.setApplicationMenu(null);
 
-app.whenReady().then(() => { // don't change to .on or start breaks https://github.com/electron/electron/pull/21972
+app.whenReady().then(() => {
   if (process.platform !== 'linux') app.quit();
   ipcMain.handle('ping', () => 'pong');
-  const win = new BrowserWindow({width: 800, height: 600,  webPreferences: { preload: path.join(currentDir  , 'preload.ts')} });
-  win.loadFile('../html/index.html');
+  const win = new BrowserWindow({width: 1280, height: 768,  webPreferences: { preload: path.join(currentDir, 'preload.ts')} });
+  win.loadFile('../index.html');
 })
 
 app.on('window-all-closed', () => { app.quit(); })

@@ -39,7 +39,7 @@ sudo chmod 4755 node_modules/electron/dist/chrome-sandbox;
 
 # run
 cd ~/code/PeriodicTasks/electron;
-clear; rm -rf .parcel-cache/ build/; mkdir build;  mkdir build/js; cp -r resources/. build/; npx parcel watch resources/tsBrowser/main.ts --dist-dir build --public-url ./;
+clear; rm -rf .parcel-cache/ build/; mkdir build;  mkdir build/js; cp -r resources/. build/; npx parcel watch resources/index.html --dist-dir build --public-url ./;
 
 # new window
 clear; npx electron ./resources/tsSystem/main.ts

@@ -1,14 +1,10 @@
-const information = document.getElementById('info');
-information.innerText = `This app is using Chromium (v${versions.chrome()}), Node.js (v${versions.node()}), and Electron (v${versions.electron()})`;
+import * as _ui from './6ui.ts';
 
-async function d(){
-const s = await window.versions.ping();
-information.innerText = s;
-}
+// start();
+// async function start() {
 
-d();
 
-//  _ui.start();
+ _ui.start();
 //   try { await _fileHelper.startup(); }
 //   catch (e) {
 //     console.error('Error message: ' + JSON.stringify(e));
