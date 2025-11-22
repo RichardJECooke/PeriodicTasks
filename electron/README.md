@@ -31,10 +31,17 @@ Each top level folder is the same app written in a different framework.
 ## Actions
 
 ```sh
+# first run
+cd ~/code/PeriodicTasks/electron;
+npm install;
+sudo chown root:root node_modules/electron/dist/chrome-sandbox;
+sudo chmod 4755 node_modules/electron/dist/chrome-sandbox;
+
 # run
 cd ~/code/PeriodicTasks/electron;
-sudo chown root:root node_modules/electron/dist/chrome-sandbox
-sudo chmod 4755 node_modules/electron/dist/chrome-sandbox
+clear; rm -rf .parcel-cache/ build/; mkdir build;  mkdir build/js; cp -r resources/. build/; npx parcel watch resources/tsBrowser/main.ts --dist-dir build --public-url ./;
+
+# new window
 clear; npx electron ./resources/tsSystem/main.ts
 
 # compile error check
