@@ -2,10 +2,9 @@
 
 Each top level folder is the same app written in a different framework.
 
-
 ## Todo
 
-- use typescript
+- get all the vue stuff to work
 - convert my neutralino code to node/renderer separation
 - synchronize files on save - watch file for changes and update.
   - at start/open file/save file, stop watching any other files and start watching that file
