@@ -30,6 +30,9 @@ https://docs.fyne.io/
 ```sh
 # creation
 sudo apt install golang gcc libgl1-mesa-dev xorg-dev libxkbcommon-dev;
+vi ~/.bashrc
+# add to end of file: export PATH="$PATH:$HOME/go/bin"
+source ~/.bashrc
 go mod init PeriodicTaskTracker;
 go get fyne.io/fyne/v2@latest;
 go install fyne.io/tools/cmd/fyne@latest;
@@ -37,6 +40,13 @@ go install fyne.io/tools/cmd/fyne@latest;
 
 # first run
 cd ~/code/PeriodicTasks/fyne;
+go mod tidy;
+clear; go run .;
+
+# build
+fyne package -os linux -release
+
+
 sudo apt install golang gcc libgl1-mesa-dev xorg-dev libxkbcommon-dev;
 npm install;
 sudo chown root:root node_modules/electron/dist/chrome-sandbox;
