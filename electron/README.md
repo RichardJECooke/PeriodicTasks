@@ -5,7 +5,7 @@ Each top level folder is the same app written in a different framework.
 
 ## Todo
 
-- use esm imports - https://www.electronjs.org/docs/latest/tutorial/esm
+- use typescript
 - convert my neutralino code to node/renderer separation
 - synchronize files on save - watch file for changes and update.
   - at start/open file/save file, stop watching any other files and start watching that file
@@ -28,13 +28,17 @@ Each top level folder is the same app written in a different framework.
 - set project to public
 - deploy to flatpak
 
-## Run
+## Actions
 
 ```sh
+# run
 cd ~/code/PeriodicTasks/electron;
 sudo chown root:root node_modules/electron/dist/chrome-sandbox
 sudo chmod 4755 node_modules/electron/dist/chrome-sandbox
-npx electron ./resources/tsSystem/main.mjs
+clear; npx electron ./resources/tsSystem/main.ts
+
+# compile error check
+clear; npx -p typescript tsc --noEmit
 ```
 
 ## History
