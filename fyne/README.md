@@ -1,11 +1,9 @@
 # Periodic Tasks
 
-Each top level folder is the same app written in a different framework.
+https://docs.fyne.io/
 
 ## Todo
 
-- get all the vue stuff to work
-- convert my neutralino code to node/renderer separation - https://www.electronjs.org/docs/latest/tutorial/ipc
 - synchronize files on save - watch file for changes and update.
   - at start/open file/save file, stop watching any other files and start watching that file
   - if that file changes, reload the tasks from it
@@ -30,8 +28,16 @@ Each top level folder is the same app written in a different framework.
 ## Actions
 
 ```sh
+# creation
+sudo apt install golang gcc libgl1-mesa-dev xorg-dev libxkbcommon-dev;
+go mod init PeriodicTaskTracker;
+go get fyne.io/fyne/v2@latest;
+go install fyne.io/tools/cmd/fyne@latest;
+
+
 # first run
-cd ~/code/PeriodicTasks/electron;
+cd ~/code/PeriodicTasks/fyne;
+sudo apt install golang gcc libgl1-mesa-dev xorg-dev libxkbcommon-dev;
 npm install;
 sudo chown root:root node_modules/electron/dist/chrome-sandbox;
 sudo chmod 4755 node_modules/electron/dist/chrome-sandbox;
