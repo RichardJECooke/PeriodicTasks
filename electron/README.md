@@ -34,7 +34,7 @@ Each top level folder is the same app written in a different framework.
 cd ~/code/PeriodicTasks/electron;
 sudo chown root:root node_modules/electron/dist/chrome-sandbox
 sudo chmod 4755 node_modules/electron/dist/chrome-sandbox
-npx electron .
+npx electron ./resources/tsSystem/main.mjs
 ```
 
 ## History
