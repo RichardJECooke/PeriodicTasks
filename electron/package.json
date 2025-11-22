@@ -12,7 +12,8 @@
   "devDependencies": {
     "@parcel/transformer-vue": "^2.16.1",
     "electron": "^39.2.2",
-    "parcel": "^2.16.1"
+    "parcel": "^2.16.1",
+    "parcel-resolver-ignore": "^2.2.1"
   },
   "dependencies": {
     "vue": "^3.5.17"
