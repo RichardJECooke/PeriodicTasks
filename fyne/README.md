@@ -1,6 +1,6 @@
 # Periodic Tasks
 
-https://docs.fyne.io/
+https://docs.fyne.io
 
 ## Todo
 
@@ -28,50 +28,33 @@ https://docs.fyne.io/
 ## Actions
 
 ```sh
-# creation
+# setup go and fyne
+cd ~/code/PeriodicTasks/fyne;
 sudo apt install golang gcc libgl1-mesa-dev xorg-dev libxkbcommon-dev;
 echo 'PATH="$PATH:$HOME/go/bin"' >> ~/.bashrc
 source ~/.bashrc
-go mod init PeriodicTaskTracker;
-go get fyne.io/fyne/v2@latest;
-go install fyne.io/tools/cmd/fyne@latest;
+# go mod init PeriodicTaskTracker; don't run again. project already exists
+# go get fyne.io/fyne/v2@latest;
+# go install fyne.io/tools/cmd/fyne@latest;
 
-# vs code
+# setup vs code
 ctrl shift p - user settings json
 add:
   "go.alternateTools": { "go": "/usr/bin/go" },
   "go.toolsGopath": "/home/me/go"
 
-# first run
+# run
 cd ~/code/PeriodicTasks/fyne;
 go mod tidy;
 clear; go run .;
 
-# build
+# check and test
+cd ~/code/PeriodicTasks/fyne;
+go fmt ./...
+go vet ./...
+go test ./...
+
+# publish
+cd ~/code/PeriodicTasks/fyne;
 fyne package -os linux -release
-
-
-sudo apt install golang gcc libgl1-mesa-dev xorg-dev libxkbcommon-dev;
-npm install;
-sudo chown root:root node_modules/electron/dist/chrome-sandbox;
-sudo chmod 4755 node_modules/electron/dist/chrome-sandbox;
-
-# run
-cd ~/code/PeriodicTasks/electron;
-clear; rm -rf .parcel-cache/ build/; mkdir build;  mkdir build/js; cp -r resources/. build/; npx parcel watch resources/index.html --dist-dir build --public-url ./ ;
-
-# new window
-clear; npx electron ./resources/tsSystem/main.ts
-
-# compile error check
-clear; npx -p typescript tsc --noEmit
-
-# build
-# uncomment content-security-policy in index.html
-# include --no-source-maps in parcel build to remove eval which clashes with csp
-# set isProduction = true in 1constants.ts to disable devtools
 ```
-
-## History
-
-- First tried Neutralino.js. Little things like file picker file extension filter didn't work. Then big things like file watcher didn't work. Gave up. Next trying Fyne and Go.
