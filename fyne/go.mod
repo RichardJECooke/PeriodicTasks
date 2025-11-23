@@ -1,4 +1,4 @@
-module RichardJECooke.PeriodicTaskTracker
+module github.com/RichardJECooke/PeriodicTasks
 
 go 1.24.4
 
