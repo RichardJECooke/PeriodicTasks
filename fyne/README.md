@@ -30,13 +30,17 @@ https://docs.fyne.io/
 ```sh
 # creation
 sudo apt install golang gcc libgl1-mesa-dev xorg-dev libxkbcommon-dev;
-vi ~/.bashrc
-# add to end of file: export PATH="$PATH:$HOME/go/bin"
+echo 'PATH="$PATH:$HOME/go/bin"' >> ~/.bashrc
 source ~/.bashrc
 go mod init PeriodicTaskTracker;
 go get fyne.io/fyne/v2@latest;
 go install fyne.io/tools/cmd/fyne@latest;
 
+# vs code
+ctrl shift p - user settings json
+add:
+  "go.alternateTools": { "go": "/usr/bin/go" },
+  "go.toolsGopath": "/home/me/go"
 
 # first run
 cd ~/code/PeriodicTasks/fyne;
