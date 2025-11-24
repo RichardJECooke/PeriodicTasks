@@ -14,7 +14,8 @@ https://docs.fyne.io
 - add minimize to taskbar with quit and restore menu items
 - add help/tips
 - style
-- write tests
+- write tests - https://docs.fyne.io/started/testing/
+- add metadata - https://docs.fyne.io/started/metadata/
 - decide on versioning scheme and set version number
 - update readme
 - update neutralino.config
