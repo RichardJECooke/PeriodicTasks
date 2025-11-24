@@ -1,13 +1,11 @@
 package src
 
-import (
-	"github.com/google/uuid"
-)
+import "github.com/google/uuid"
 
-var Store TStore = TStore{
+var Store = TStore{
 	TaskGroups: []TTaskGroup{
 		{
-			Id:      uuid.New().String(),
+			Id:      uuid.NewString(),
 			Version: TaskFileVersion,
 			Tasks:   []TTask{},
 		},
