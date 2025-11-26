@@ -11,28 +11,21 @@ import (
 	constants "github.com/RichardJECooke/PeriodicTasks/src/1constants"
 )
 
-const Permission_RWX_RX_RX os.FileMode = 0755
-
-var _configFilePath string
-
 func Startup() {
 	setupConfigFile()
 	// TODO  _watch(() => _store.config, async (config) => { await writeConfigFile(); }, { deep: true });
-	err := ReadDataFile()
-	if err != nil {
+	if err := ReadDataFile(); err != nil {
 		WriteDataFile()
 	}
 	// TODO  _watch(() => _store.taskGroups,  async (tasks)  => { await writeDataFile();   }, { deep: true });
 }
 
 func WriteConfigFile() {
-	//  writeFile(_configFolderPath + '/' + _constants.configFilePath, JSON.stringify(_store.config, null, 4));
 	jsonData, err := json.MarshalIndent(Store.Config, "", "    ")
 	if err != nil {
-		log.Fatalf("Fatal converting objects to JSON writing config file: %v", err)
+		log.Fatalf("Fatal error converting objects to JSON writing config file: %v", err)
 	}
-	err = os.WriteFile(Store.Config.DataFilePath, jsonData, Permission_RWX_RX_RX)
-	if err != nil {
+	if err = os.WriteFile(Store.Config.ConfigFilePath, jsonData, constants.Permission_RWX_RX_RX); err != nil {
 		log.Fatalf("Fatal error writing config file: %v", err)
 	}
 }
@@ -40,17 +33,17 @@ func WriteConfigFile() {
 func ReadDataFile() error {
 	dataText, err := os.ReadFile(Store.Config.DataFilePath)
 	if err != nil {
-		return errors.New("Data file path does not exist when reading data")
+		return errors.New("data file path does not exist when reading data")
 	}
 	if len(dataText) == 0 {
 		return nil
 	}
 	var taskGroup types.TTaskGroup
-	err := json.Unmarshal(dataText, &taskGroup)
-	if err != nil {
+	if err := json.Unmarshal(dataText, &taskGroup); err != nil {
 		log.Fatalf("Data file has invalid JSON: %v", err)
 	}
-	TaskHelper.setTaskGroup(taskGroup)
+	SetTaskGroup(taskGroup)
+	return nil
 }
 
 func WriteDataFile() {
@@ -61,15 +54,10 @@ func WriteDataFile() {
 	if err != nil {
 		log.Fatalf("Fatal converting objects to JSON writing data file: %v", err)
 	}
-	err = os.WriteFile(Store.Config.DataFilePath, jsonData, Permission_RWX_RX_RX)
-	if err != nil {
+	if err = os.WriteFile(Store.Config.DataFilePath, jsonData, constants.Permission_RWX_RX_RX); err != nil {
 		log.Fatalf("Fatal error writing data file: %v", err)
 	}
 	// TODO watch file for changes and reload
-}
-
-func SetDataFilePath(path string) {
-	Store.Config.DataFilePath = path
 }
 
 func setupConfigFile() {
@@ -77,23 +65,22 @@ func setupConfigFile() {
 	if err != nil {
 		log.Fatalf("Fatal error getting config path: %v", err)
 	}
-	_configFilePath = filepath.Join(configFolderPath, constants.ConfigPathExtensionAndFileName)
-	SetDataFilePath(filepath.Join(configFolderPath, constants.DefaultDataPathExtensionAndFileName))
+	configFolderPath = filepath.Join(configFolderPath, constants.ConfigFolderPathExtension)
+	Store.Config.ConfigFilePath = filepath.Join(configFolderPath, constants.ConfigPathExtensionAndFileName)
+	Store.Config.DataFilePath = filepath.Join(configFolderPath, constants.DefaultDataPathExtensionAndFileName)
 	if !DoesFolderExist(configFolderPath) {
-		err = os.MkdirAll(configFolderPath, Permission_RWX_RX_RX)
-		if err != nil {
+		if err = os.MkdirAll(configFolderPath, constants.Permission_RWX_RX_RX); err != nil {
 			log.Fatalf("Fatal error creating config directory: %v", err)
 		}
 	}
-	if !DoesFileExist(_configFilePath) {
+	if !DoesFileExist(Store.Config.ConfigFilePath) {
 		WriteConfigFile()
 	}
-	configDataText, err := os.ReadFile(_configFilePath)
+	configDataText, err := os.ReadFile(Store.Config.ConfigFilePath)
 	if err != nil {
 		log.Fatalf("Fatal error reading config JSON: %v", err)
 	}
-	err = json.Unmarshal(configDataText, &Store.Config)
-	if err != nil {
+	if err = json.Unmarshal(configDataText, &Store.Config); err != nil {
 		log.Fatalf("Fatal error parsing config JSON: %v", err)
 	}
 }

@@ -23,6 +23,7 @@ type TTaskGroup struct {
 
 type TConfig struct {
 	DataFilePath               string
+	ConfigFilePath             string
 	ShouldNotify               bool
 	ShouldMinimizeToTrayOnQuit bool
 }

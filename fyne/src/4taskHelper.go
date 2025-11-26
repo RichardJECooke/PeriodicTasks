@@ -6,32 +6,34 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/samber/lo"
+
+	types "github.com/RichardJECooke/PeriodicTasks/src/0types"
 )
 
 func AddTask() {
-	task := TTask{
+	task := types.TTask{
 		Id:         uuid.New().String(),
 		Name:       "newtask",
 		Days:       1,
 		IsArchived: false,
-		DatesDone:  []TIdAndDate{},
+		DatesDone:  []types.TIdAndDate{},
 	}
 	Store.TaskGroups[0].Tasks = append(Store.TaskGroups[0].Tasks, task)
 	sortTasksDatesDone()
 }
 
-func DeleteTask(taskToDelete TTask) {
-	Store.TaskGroups[0].Tasks = lo.Filter(Store.TaskGroups[0].Tasks, func(taskItem TTask, _ int) bool {
+func DeleteTask(taskToDelete types.TTask) {
+	Store.TaskGroups[0].Tasks = lo.Filter(Store.TaskGroups[0].Tasks, func(taskItem types.TTask, _ int) bool {
 		return taskItem.Id != taskToDelete.Id
 	})
 }
 
-func SetTaskGroup(taskFile TTaskGroup) {
+func SetTaskGroup(taskFile types.TTaskGroup) {
 	Store.TaskGroups[0] = taskFile
 	sortTasksDatesDone()
 }
 
-func GetNumDaysUntilDue(task TTask) int {
+func GetNumDaysUntilDue(task types.TTask) int {
 	if len(task.DatesDone) == 0 {
 		return 0
 	}
@@ -47,8 +49,8 @@ func GetToday() time.Time {
 	return time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, now.Location())
 }
 
-func AddDoneToday(task *TTask) {
-	task.DatesDone = append(task.DatesDone, TIdAndDate{Id: uuid.New().String(), Date: GetToday()})
+func AddDoneToday(task *types.TTask) {
+	task.DatesDone = append(task.DatesDone, types.TIdAndDate{Id: uuid.New().String(), Date: GetToday()})
 	sortTasksDatesDone()
 }
 
@@ -56,9 +58,9 @@ func IsSameDay(first, second time.Time) bool {
 	return first.Year() == second.Year() && first.Month() == second.Month() && first.Day() == second.Day()
 }
 
-func RemoveDoneToday(task *TTask) {
+func RemoveDoneToday(task *types.TTask) {
 	today := GetToday()
-	task.DatesDone = lo.Filter(task.DatesDone, func(doneEntry TIdAndDate, _ int) bool {
+	task.DatesDone = lo.Filter(task.DatesDone, func(doneEntry types.TIdAndDate, _ int) bool {
 		return !IsSameDay(doneEntry.Date, today)
 	})
 	sortTasksDatesDone()
@@ -66,7 +68,7 @@ func RemoveDoneToday(task *TTask) {
 
 func RemoveDate(dateID string) {
 	for _, task := range Store.TaskGroups[0].Tasks {
-		task.DatesDone = lo.Filter(task.DatesDone, func(date TIdAndDate, _ int) bool {
+		task.DatesDone = lo.Filter(task.DatesDone, func(date types.TIdAndDate, _ int) bool {
 			return date.Id != dateID
 		})
 	}
@@ -75,7 +77,7 @@ func RemoveDate(dateID string) {
 
 func sortTasksDatesDone() {
 	for _, task := range Store.TaskGroups[0].Tasks {
-		slices.SortFunc(task.DatesDone, func(a, b TIdAndDate) int {
+		slices.SortFunc(task.DatesDone, func(a, b types.TIdAndDate) int {
 			return a.Date.Compare(b.Date)
 		})
 	}

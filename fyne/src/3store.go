@@ -17,6 +17,7 @@ var Store = types.TStore{
 	},
 	Config: types.TConfig{
 		DataFilePath:               constants.DefaultDataPathExtensionAndFileName,
+		ConfigFilePath:             "",
 		ShouldNotify:               true,
 		ShouldMinimizeToTrayOnQuit: true,
 	},
