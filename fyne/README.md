@@ -7,6 +7,8 @@ https://docs.fyne.io
 - synchronize files on save - watch file for changes and update.
   - at start/open file/save file, stop watching any other files and start watching that file
   - if that file changes, reload the tasks from it
+- watch config and data for changes and save if any changes
+- make vue ui in fyne
 - display errors in toasts
 - export file
 - import file
@@ -16,7 +18,7 @@ https://docs.fyne.io
 - style
 - write tests - https://docs.fyne.io/started/testing/
 - add metadata - https://docs.fyne.io/started/metadata/
-- minimize the build
+- minimize the build with UPX
 - decide on versioning scheme and set version number
 - update readme
 - update neutralino.config
@@ -35,7 +37,7 @@ cd ~/code/PeriodicTasks/fyne;
 sudo apt install golang gcc libgl1-mesa-dev xorg-dev libxkbcommon-dev;
 echo 'PATH="$PATH:$HOME/go/bin"' >> ~/.bashrc
 source ~/.bashrc
-# go mod init PeriodicTaskTracker; don't run again. project already exists
+# go mod init PeriodicTasks; don't run again. project already exists
 # go get fyne.io/fyne/v2@latest;
 # go install fyne.io/tools/cmd/fyne@latest;
 
@@ -55,9 +57,11 @@ cd ~/code/PeriodicTasks/fyne;
 go fmt ./...
 go vet ./...
 go test ./...
-go build
+go build -ldflags "-s -w" -o build/PeriodicTasks;   # remove debug and symbol data
 
 # publish
 cd ~/code/PeriodicTasks/fyne;
-fyne package -os linux -release
+cd build;
+fyne package -os linux -release;
+cd ..
 ```
