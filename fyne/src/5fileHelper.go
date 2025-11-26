@@ -65,7 +65,6 @@ func setupConfigFile() {
 	if err != nil {
 		log.Fatalf("Fatal error getting config path: %v", err)
 	}
-	configFolderPath = filepath.Join(configFolderPath, constants.ConfigFolderPathExtension)
 	Store.Config.ConfigFilePath = filepath.Join(configFolderPath, constants.ConfigPathExtensionAndFileName)
 	Store.Config.DataFilePath = filepath.Join(configFolderPath, constants.DefaultDataPathExtensionAndFileName)
 	if !DoesFolderExist(configFolderPath) {
