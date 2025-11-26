@@ -1,8 +1,8 @@
 package constants
 
 const (
-	ConfigFolderPathExtension = "info.richardjecooke.PeriodicTasks"
-	ConfigFileName            = ConfigFolderPathExtension + "/config.json"
-	DefaultDataFileName       = ConfigFolderPathExtension + "/tasks.json"
-	TaskFileVersion           = 1
+	ConfigFolderPathExtension           = "info.richardjecooke.PeriodicTasks"
+	ConfigPathExtensionAndFileName      = ConfigFolderPathExtension + "/config.json"
+	DefaultDataPathExtensionAndFileName = ConfigFolderPathExtension + "/tasks.json"
+	TaskFileVersion                     = 1
 )

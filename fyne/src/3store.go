@@ -1,17 +1,22 @@
 package src
 
-import "github.com/google/uuid"
+import (
+	"github.com/google/uuid"
 
-var Store = TStore{
-	TaskGroups: []TTaskGroup{
+	types "github.com/RichardJECooke/PeriodicTasks/src/0types"
+	constants "github.com/RichardJECooke/PeriodicTasks/src/1constants"
+)
+
+var Store = types.TStore{
+	TaskGroups: []types.TTaskGroup{
 		{
 			Id:      uuid.NewString(),
-			Version: TaskFileVersion,
-			Tasks:   []TTask{},
+			Version: constants.TaskFileVersion,
+			Tasks:   []types.TTask{},
 		},
 	},
-	Config: TConfig{
-		DataFilePath:               DefaultDataFileName,
+	Config: types.TConfig{
+		DataFilePath:               constants.DefaultDataPathExtensionAndFileName,
 		ShouldNotify:               true,
 		ShouldMinimizeToTrayOnQuit: true,
 	},
