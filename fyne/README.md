@@ -16,6 +16,7 @@ https://docs.fyne.io
 - style
 - write tests - https://docs.fyne.io/started/testing/
 - add metadata - https://docs.fyne.io/started/metadata/
+- minimize the build
 - decide on versioning scheme and set version number
 - update readme
 - update neutralino.config
@@ -52,7 +53,7 @@ clear; go run .;
 # check and test
 cd ~/code/PeriodicTasks/fyne;
 go fmt ./...
-go vet ./...
+go vet -shadow ./...
 go test ./...
 
 # publish

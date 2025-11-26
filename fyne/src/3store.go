@@ -11,7 +11,7 @@ var Store = TStore{
 		},
 	},
 	Config: TConfig{
-		DataFilePath:               DefaultDataFilePath,
+		DataFilePath:               DefaultDataFileName,
 		ShouldNotify:               true,
 		ShouldMinimizeToTrayOnQuit: true,
 	},
