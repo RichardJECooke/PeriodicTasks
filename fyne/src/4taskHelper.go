@@ -26,7 +26,7 @@ func DeleteTask(taskToDelete TTask) {
 	})
 }
 
-func SetTaskFile(taskFile TTaskGroup) {
+func SetTaskGroup(taskFile TTaskGroup) {
 	Store.TaskGroups[0] = taskFile
 	sortTasksDatesDone()
 }
