@@ -11,7 +11,7 @@ import (
 	constants "github.com/RichardJECooke/PeriodicTasks/src/1constants"
 )
 
-func Startup() {
+func Start() {
 	setupConfigFile()
 	// TODO  _watch(() => _store.config, async (config) => { await writeConfigFile(); }, { deep: true });
 	if err := ReadDataFile(); err != nil {

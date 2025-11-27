@@ -1,27 +1,11 @@
 package main
 
 import (
-	"time"
-
-	"fyne.io/fyne/v2"
-	fyneApp "fyne.io/fyne/v2/app"
-	"fyne.io/fyne/v2/container"
-	"fyne.io/fyne/v2/widget"
-
 	"github.com/RichardJECooke/PeriodicTasks/src"
+	ui "github.com/RichardJECooke/PeriodicTasks/src/6ui"
 )
 
 func main() {
-	app := fyneApp.New()
-	window := app.NewWindow("Hello World")
-	message := widget.NewLabel("Welcome")
-	button := widget.NewButton("Update", func() {
-		formatted := time.Now().Format("Time: 03:04:05")
-		message.SetText(formatted)
-	})
-	window.SetContent(container.NewVBox(message, button))
-	window.Resize(fyne.NewSize(1280, 720))
-	window.CenterOnScreen()
-	src.Startup()
-	window.ShowAndRun()
+	src.Start()
+	ui.Start()
 }
