@@ -1,39 +1,33 @@
 package src
 
 import (
-	"slices"
 	"time"
 
 	"github.com/google/uuid"
 	"github.com/samber/lo"
 
 	types "github.com/RichardJECooke/PeriodicTasks/src/0types"
+	store "github.com/RichardJECooke/PeriodicTasks/src/3store"
 )
 
 func AddTask() {
-	task := types.TTask{
+	task := types.Task{
 		Id:         uuid.New().String(),
 		Name:       "newtask",
 		Days:       1,
 		IsArchived: false,
-		DatesDone:  []types.TIdAndDate{},
+		DatesDone:  []types.IdAndDate{},
 	}
-	Store.TaskGroups[0].Tasks = append(Store.TaskGroups[0].Tasks, task)
-	sortTasksDatesDone()
+	store.SetTasks(append(store.GetStore().TaskGroups[0].Tasks, task))
 }
 
-func DeleteTask(taskToDelete types.TTask) {
-	Store.TaskGroups[0].Tasks = lo.Filter(Store.TaskGroups[0].Tasks, func(taskItem types.TTask, _ int) bool {
+func DeleteTask(taskToDelete types.Task) {
+	store.SetTasks(lo.Filter(store.GetStore().TaskGroups[0].Tasks, func(taskItem types.Task, _ int) bool {
 		return taskItem.Id != taskToDelete.Id
-	})
+	}))
 }
 
-func SetTaskGroup(taskFile types.TTaskGroup) {
-	Store.TaskGroups[0] = taskFile
-	sortTasksDatesDone()
-}
-
-func GetNumDaysUntilDue(task types.TTask) int {
+func GetNumDaysUntilDue(task types.Task) int {
 	if len(task.DatesDone) == 0 {
 		return 0
 	}
@@ -49,36 +43,28 @@ func GetToday() time.Time {
 	return time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, now.Location())
 }
 
-func AddDoneToday(task *types.TTask) {
-	task.DatesDone = append(task.DatesDone, types.TIdAndDate{Id: uuid.New().String(), Date: GetToday()})
-	sortTasksDatesDone()
-}
-
 func IsSameDay(first, second time.Time) bool {
 	return first.Year() == second.Year() && first.Month() == second.Month() && first.Day() == second.Day()
 }
 
-func RemoveDoneToday(task *types.TTask) {
+func AddDoneToday(task *types.Task) {
+	task.DatesDone = append(task.DatesDone, types.IdAndDate{Id: uuid.New().String(), Date: GetToday()})
+	store.SetTasks(store.GetStore().TaskGroups[0].Tasks)
+}
+
+func RemoveDoneToday(task *types.Task) {
 	today := GetToday()
-	task.DatesDone = lo.Filter(task.DatesDone, func(doneEntry types.TIdAndDate, _ int) bool {
+	task.DatesDone = lo.Filter(task.DatesDone, func(doneEntry types.IdAndDate, _ int) bool {
 		return !IsSameDay(doneEntry.Date, today)
 	})
-	sortTasksDatesDone()
+	store.SetTasks(store.GetStore().TaskGroups[0].Tasks)
 }
 
 func RemoveDate(dateID string) {
-	for _, task := range Store.TaskGroups[0].Tasks {
-		task.DatesDone = lo.Filter(task.DatesDone, func(date types.TIdAndDate, _ int) bool {
+	for _, task := range store.GetStore().TaskGroups[0].Tasks {
+		task.DatesDone = lo.Filter(task.DatesDone, func(date types.IdAndDate, _ int) bool {
 			return date.Id != dateID
 		})
 	}
-	sortTasksDatesDone()
-}
-
-func sortTasksDatesDone() {
-	for _, task := range Store.TaskGroups[0].Tasks {
-		slices.SortFunc(task.DatesDone, func(a, b types.TIdAndDate) int {
-			return a.Date.Compare(b.Date)
-		})
-	}
+	store.SetTasks(store.GetStore().TaskGroups[0].Tasks)
 }

@@ -7,57 +7,96 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/fsnotify/fsnotify"
+
 	types "github.com/RichardJECooke/PeriodicTasks/src/0types"
 	constants "github.com/RichardJECooke/PeriodicTasks/src/1constants"
+	store "github.com/RichardJECooke/PeriodicTasks/src/3store"
 )
 
 func Start() {
 	setupConfigFile()
-	// TODO  _watch(() => _store.config, async (config) => { await writeConfigFile(); }, { deep: true });
 	if err := ReadDataFile(); err != nil {
 		WriteDataFile()
 	}
-	// TODO  _watch(() => _store.taskGroups,  async (tasks)  => { await writeDataFile();   }, { deep: true });
+	store.RegisterForStoreChanged(handleStoreChanged)
+	// TODO watch data file for changes and reload
+	go watchDataFileForChanges()
+}
+
+func watchDataFileForChanges() {
+	watcher, err := fsnotify.NewWatcher()
+	if err != nil {
+		log.Printf("Error creating file watcher: %v", err)
+		return
+	}
+	defer watcher.Close()
+	dataFilePath := store.GetStore().Config.DataFilePath
+	if err = watcher.Add(dataFilePath); err != nil {
+		log.Fatalf("Error watching data file: %v", err)
+	}
+	for {
+		select {
+		case event, ok := <-watcher.Events:
+			if !ok {
+				return
+			}
+			if event.Op&fsnotify.Write == fsnotify.Write {
+				if err := ReadDataFile(); err != nil {
+					log.Printf("Error reloading data file: %v", err)
+				}
+			}
+		case err, ok := <-watcher.Errors:
+			if !ok {
+				return
+			}
+			log.Printf("Data file watcher error: %v", err)
+		}
+	}
+}
+
+func handleStoreChanged() {
+	WriteConfigFile()
+	WriteDataFile()
 }
 
 func WriteConfigFile() {
-	jsonData, err := json.MarshalIndent(Store.Config, "", "    ")
+	jsonData, err := json.MarshalIndent(store.GetStore().Config, "", "    ")
 	if err != nil {
 		log.Fatalf("Fatal error converting objects to JSON writing config file: %v", err)
 	}
-	if err = os.WriteFile(Store.Config.ConfigFilePath, jsonData, constants.Permission_RWX_RX_RX); err != nil {
+	if err = os.WriteFile(store.GetStore().Config.ConfigFilePath, jsonData, constants.Permission_RWX_RX_RX); err != nil {
 		log.Fatalf("Fatal error writing config file: %v", err)
 	}
 }
 
 func ReadDataFile() error {
-	dataText, err := os.ReadFile(Store.Config.DataFilePath)
+	dataText, err := os.ReadFile(store.GetStore().Config.DataFilePath)
 	if err != nil {
 		return errors.New("data file path does not exist when reading data")
 	}
 	if len(dataText) == 0 {
 		return nil
 	}
-	var taskGroup types.TTaskGroup
+	var taskGroup types.TaskGroup
 	if err := json.Unmarshal(dataText, &taskGroup); err != nil {
 		log.Fatalf("Data file has invalid JSON: %v", err)
 	}
-	SetTaskGroup(taskGroup)
+	store.SetTaskGroup(taskGroup)
 	return nil
 }
 
 func WriteDataFile() {
-	if Store.Config.DataFilePath != "" {
+	if store.GetStore().Config.DataFilePath != "" {
 		log.Fatalf("Data file path does not exist when writing data")
 	}
-	jsonData, err := json.MarshalIndent(Store.TaskGroups[0], "", "    ")
+	jsonData, err := json.MarshalIndent(store.GetStore().TaskGroups[0], "", "    ")
 	if err != nil {
 		log.Fatalf("Fatal converting objects to JSON writing data file: %v", err)
 	}
-	if err = os.WriteFile(Store.Config.DataFilePath, jsonData, constants.Permission_RWX_RX_RX); err != nil {
+	if err = os.WriteFile(store.GetStore().Config.DataFilePath, jsonData, constants.Permission_RWX_RX_RX); err != nil {
 		log.Fatalf("Fatal error writing data file: %v", err)
 	}
-	// TODO watch file for changes and reload
 }
 
 func setupConfigFile() {
@@ -65,23 +104,25 @@ func setupConfigFile() {
 	if err != nil {
 		log.Fatalf("Fatal error getting config path: %v", err)
 	}
-	Store.Config.ConfigFilePath = filepath.Join(configFolderPath, constants.ConfigPathExtensionAndFileName)
-	Store.Config.DataFilePath = filepath.Join(configFolderPath, constants.DefaultDataPathExtensionAndFileName)
+	tempConfig := store.GetStore().Config
+	tempConfig.ConfigFilePath = filepath.Join(configFolderPath, constants.ConfigPathExtensionAndFileName)
+	tempConfig.DataFilePath = filepath.Join(configFolderPath, constants.DefaultDataPathExtensionAndFileName)
 	if !DoesFolderExist(configFolderPath) {
 		if err = os.MkdirAll(configFolderPath, constants.Permission_RWX_RX_RX); err != nil {
 			log.Fatalf("Fatal error creating config directory: %v", err)
 		}
 	}
-	if !DoesFileExist(Store.Config.ConfigFilePath) {
+	if !DoesFileExist(tempConfig.ConfigFilePath) {
 		WriteConfigFile()
 	}
-	configDataText, err := os.ReadFile(Store.Config.ConfigFilePath)
+	configDataText, err := os.ReadFile(tempConfig.ConfigFilePath)
 	if err != nil {
 		log.Fatalf("Fatal error reading config JSON: %v", err)
 	}
-	if err = json.Unmarshal(configDataText, &Store.Config); err != nil {
+	if err = json.Unmarshal(configDataText, &tempConfig); err != nil {
 		log.Fatalf("Fatal error parsing config JSON: %v", err)
 	}
+	store.SetConfig(tempConfig)
 }
 
 func DoesFolderExist(path string) bool {

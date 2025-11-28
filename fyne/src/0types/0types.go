@@ -2,33 +2,33 @@ package types
 
 import "time"
 
-type TIdAndDate struct {
+type IdAndDate struct {
 	Id   string
 	Date time.Time
 }
 
-type TTask struct {
+type Task struct {
 	Id         string
 	Name       string
 	Days       int
 	IsArchived bool
-	DatesDone  []TIdAndDate
+	DatesDone  []IdAndDate
 }
 
-type TTaskGroup struct {
+type TaskGroup struct {
 	Id      string
 	Version int
-	Tasks   []TTask
+	Tasks   []Task
 }
 
-type TConfig struct {
+type Config struct {
 	DataFilePath               string
 	ConfigFilePath             string
 	ShouldNotify               bool
 	ShouldMinimizeToTrayOnQuit bool
 }
 
-type TStore struct {
-	TaskGroups []TTaskGroup
-	Config     TConfig
+type Store struct {
+	TaskGroups []TaskGroup
+	Config     Config
 }
