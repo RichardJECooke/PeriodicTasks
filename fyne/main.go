@@ -1,11 +1,11 @@
 package main
 
 import (
-	"github.com/RichardJECooke/PeriodicTasks/src"
+	fileLogic "github.com/RichardJECooke/PeriodicTasks/src/5fileLogic"
 	ui "github.com/RichardJECooke/PeriodicTasks/src/6ui"
 )
 
 func main() {
-	src.Start()
+	fileLogic.Start()
 	ui.Start()
 }

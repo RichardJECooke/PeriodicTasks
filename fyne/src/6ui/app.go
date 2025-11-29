@@ -5,10 +5,14 @@ import (
 	fyneApp "fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
+
+	fileLogic "github.com/RichardJECooke/PeriodicTasks/src/5fileLogic"
 )
 
 func Start() {
 	app := fyneApp.New()
+	app.Lifecycle().SetOnEnteredForeground(fileLogic.HandleWindowRestored)
+	app.Lifecycle().SetOnExitedForeground(fileLogic.HandleWindowMinimized)
 	window := app.NewWindow("Periodic Tasks")
 	message := widget.NewLabel("Tasks")
 	appContainer := container.NewVBox(

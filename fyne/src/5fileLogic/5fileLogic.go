@@ -1,4 +1,4 @@
-package src
+package fileLogic
 
 import (
 	"encoding/json"
@@ -8,8 +8,6 @@ import (
 	"path/filepath"
 	"sync/atomic"
 	"time"
-
-	"github.com/fsnotify/fsnotify"
 
 	types "github.com/RichardJECooke/PeriodicTasks/src/0types"
 	constants "github.com/RichardJECooke/PeriodicTasks/src/1constants"
@@ -25,60 +23,7 @@ func Start() {
 		WriteDataFile()
 	}
 	store.RegisterForStoreChanged(handleStoreChanged)
-	go watchDataFileForChangesAndReload()
-}
-
-func watchDataFileForChangesAndReload() {
-	dataFilePath := store.GetStore().Config.DataFilePath
-	for { // outer loop to restart watcher on path change
-		watcher, err := fsnotify.NewWatcher()
-		if err != nil {
-			log.Fatalf("Error creating file watcher: %v", err)
-		}
-		if err := watcher.Add(dataFilePath); err != nil {
-			log.Fatalf("Error watching data file: %v", err)
-		}
-		pathChanged := false
-		for { // inner loop to watch current path
-			select {
-			case event, ok := <-watcher.Events:
-				if !ok {
-					continue
-				}
-				if event.Op&fsnotify.Write == fsnotify.Write {
-					if pauseFileWatcher.Load() {
-						continue
-					}
-					if err := ReadDataFile(); err != nil {
-						log.Printf("Error reloading data file in file watcher: %v", err)
-					}
-				}
-			case err, ok := <-watcher.Errors:
-				if ok {
-					log.Printf("Data file watcher error: %v", err)
-				}
-			case newDataFilePath, ok := <-changeDataFilePathChannel:
-				if !ok {
-					watcher.Close()
-					return
-				}
-				if dataFilePath != newDataFilePath {
-					log.Printf("Data file path changed from %s to %s. Restarting watcher.", dataFilePath, newDataFilePath)
-					watcher.Remove(dataFilePath)
-					watcher.Close()
-					pathChanged = true
-					dataFilePath = newDataFilePath
-				}
-			}
-			if pathChanged {
-				break
-			}
-		}
-		if pathChanged {
-			continue
-		}
-		return
-	}
+	go WatchDataFileForChangesAndReload()
 }
 
 func handleStoreChanged() {
@@ -131,6 +76,15 @@ func ReadDataFile() error {
 	return nil
 }
 
+func ReadDataFileIfChangeSinceLastRead(timeDataFileLastRead time.Time) {
+	err, timeFileChanged := getFileChangedTime(store.GetStore().Config.DataFilePath)
+	if err != nil {
+		if timeFileChanged.After(timeDataFileLastRead) {
+			ReadDataFile()
+		}
+	}
+}
+
 func setupConfigFile() {
 	configFolderPath, err := os.UserConfigDir()
 	if err != nil {
@@ -165,4 +119,13 @@ func DoesFolderExist(path string) bool {
 func DoesFileExist(path string) bool {
 	_, err := os.ReadFile(path)
 	return err == nil
+}
+
+func getFileChangedTime(filePath string) (error, time.Time) {
+	fileInfo, err := os.Stat(filePath)
+	if err != nil {
+		log.Println("Error getting time updated of file:", err)
+		return err, time.Time{}
+	}
+	return nil, fileInfo.ModTime()
 }
