@@ -10,11 +10,15 @@ import (
 	store "github.com/RichardJECooke/PeriodicTasks/src/3store"
 )
 
-var timeDataFileLastRead = time.Date(1900, 1, 1, 0, 0, 0, 0, time.UTC)
+// var timeDataFileLastRead = time.Date(1900, 1, 1, 0, 0, 0, 0, time.UTC)
 var pauseFileWatcherChannel = make(chan bool)
 var filenameFileWatcherChannel = make(chan string)
+var requestFileReadTimeChannel = make(chan bool)
+var sendFileReadTimeChannel = make(chan time.Time)
 
 func HandleWindowRestored() {
+	requestFileReadTimeChannel <- true
+	timeDataFileLastRead := <-sendFileReadTimeChannel
 	ReadDataFileIfChangeSinceLastRead(timeDataFileLastRead)
 	pauseFileWatcherChannel <- false
 }
@@ -24,10 +28,28 @@ func HandleWindowMinimized() {
 }
 
 func WatchDataFileForChangesAndReload() {
+	var timeDataFileLastRead = time.Date(1900, 1, 1, 0, 0, 0, 0, time.UTC)
 	dataFilePath := store.GetStore().Config.DataFilePath
 	debouncedReadDataFileIfChangeSinceLastRead, cancelDebouncedReadDataFileIfChangeSinceLastRead := lo.NewDebounce(3000*time.Millisecond, ReadDataFileIfChangeSinceLastRead)
 
 	cancelDebouncedReadDataFileIfChangeSinceLastRead()
+	select {
+	case _ = <-requestFileReadTimeChannel:
+		sendFileReadTimeChannel <- timeDataFileLastRead
+	case shouldPauseWatcher := <-pauseFileWatcherChannel:
+		if shouldPauseWatcher {
+			for {
+				select {
+				case shouldPauseWatcher = <-pauseFileWatcherChannel:
+					if !shouldPauseWatcher {
+						break
+					}
+				case _ = <-requestFileReadTimeChannel:
+					sendFileReadTimeChannel <- timeDataFileLastRead
+				}
+			}
+		}
+	}
 
 	for { // outer loop to restart watcher on path change
 		watcher, err := fsnotify.NewWatcher()
