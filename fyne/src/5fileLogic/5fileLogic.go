@@ -6,16 +6,12 @@ import (
 	"log"
 	"os"
 	"path/filepath"
-	"sync/atomic"
 	"time"
 
 	types "github.com/RichardJECooke/PeriodicTasks/src/0types"
 	constants "github.com/RichardJECooke/PeriodicTasks/src/1constants"
 	store "github.com/RichardJECooke/PeriodicTasks/src/3store"
 )
-
-var pauseFileWatcher atomic.Bool
-var changeDataFilePathChannel = make(chan string)
 
 func Start() {
 	setupConfigFile()
@@ -27,7 +23,7 @@ func Start() {
 }
 
 func handleStoreChanged() {
-	changeDataFilePathChannel <- store.GetStore().Config.DataFilePath
+	SetFileWatcherFilename(store.GetStore().Config.DataFilePath)
 	WriteConfigFile()
 	WriteDataFile()
 }
@@ -40,13 +36,13 @@ func WriteDataFile() {
 	if err != nil {
 		log.Fatalf("Fatal converting objects to JSON writing data file: %v", err)
 	}
-	pauseFileWatcher.Store(true)
+	PauseFileWatcher(true)
 	if err = os.WriteFile(store.GetStore().Config.DataFilePath, jsonData, constants.Permission_RWX_RX_RX); err != nil {
 		log.Fatalf("Fatal error writing data file: %v", err)
 	}
 	go func() {
 		time.Sleep(1 * time.Second)
-		pauseFileWatcher.Store(false)
+		PauseFileWatcher(false)
 	}()
 }
 
@@ -63,6 +59,7 @@ func WriteConfigFile() {
 func ReadDataFile() error {
 	dataText, err := os.ReadFile(store.GetStore().Config.DataFilePath)
 	if err != nil {
+		log.Printf("Error reading data file: %v", err)
 		return errors.New("data file path does not exist when reading data")
 	}
 	if len(dataText) == 0 {

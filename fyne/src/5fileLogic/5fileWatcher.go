@@ -10,9 +10,8 @@ import (
 	store "github.com/RichardJECooke/PeriodicTasks/src/3store"
 )
 
-// var timeDataFileLastRead = time.Date(1900, 1, 1, 0, 0, 0, 0, time.UTC)
 var pauseFileWatcherChannel = make(chan bool)
-var filenameFileWatcherChannel = make(chan string)
+var filenameChangedChannel = make(chan string)
 var requestFileReadTimeChannel = make(chan bool)
 var sendFileReadTimeChannel = make(chan time.Time)
 
@@ -20,83 +19,74 @@ func HandleWindowRestored() {
 	requestFileReadTimeChannel <- true
 	timeDataFileLastRead := <-sendFileReadTimeChannel
 	ReadDataFileIfChangeSinceLastRead(timeDataFileLastRead)
-	pauseFileWatcherChannel <- false
+	PauseFileWatcher(false)
 }
 
 func HandleWindowMinimized() {
-	pauseFileWatcherChannel <- true
+	PauseFileWatcher(true)
+}
+
+func PauseFileWatcher(shouldPause bool) {
+	pauseFileWatcherChannel <- shouldPause
+}
+
+func SetFileWatcherFilename(filename string) {
+	filenameChangedChannel <- filename
 }
 
 func WatchDataFileForChangesAndReload() {
-	var timeDataFileLastRead = time.Date(1900, 1, 1, 0, 0, 0, 0, time.UTC)
-	dataFilePath := store.GetStore().Config.DataFilePath
-	debouncedReadDataFileIfChangeSinceLastRead, cancelDebouncedReadDataFileIfChangeSinceLastRead := lo.NewDebounce(3000*time.Millisecond, ReadDataFileIfChangeSinceLastRead)
-
-	cancelDebouncedReadDataFileIfChangeSinceLastRead()
-	select {
-	case _ = <-requestFileReadTimeChannel:
-		sendFileReadTimeChannel <- timeDataFileLastRead
-	case shouldPauseWatcher := <-pauseFileWatcherChannel:
-		if shouldPauseWatcher {
-			for {
-				select {
-				case shouldPauseWatcher = <-pauseFileWatcherChannel:
-					if !shouldPauseWatcher {
-						break
-					}
-				case _ = <-requestFileReadTimeChannel:
-					sendFileReadTimeChannel <- timeDataFileLastRead
+	timeDataFileLastRead := time.Date(1900, 1, 1, 0, 0, 0, 0, time.UTC)
+	datafilePath := store.GetStore().Config.DataFilePath
+	readDataDebounced, _ := lo.NewDebounce(3000*time.Millisecond, ReadDataFileIgnoreError)
+	watcher := createWatcher(datafilePath)
+	for {
+		select {
+		case <-requestFileReadTimeChannel:
+			sendFileReadTimeChannel <- timeDataFileLastRead
+		case newDatafilePath := <-filenameChangedChannel:
+			if newDatafilePath != datafilePath {
+				datafilePath = newDatafilePath
+				watcher.Close()
+				createWatcher(datafilePath)
+			}
+		case shouldPauseWatcher := <-pauseFileWatcherChannel:
+			if shouldPauseWatcher {
+				watcher.Close()
+			} else {
+				if err := watcher.Close(); err != nil {
+					// already closed
 				}
+				watcher = createWatcher(datafilePath)
+			}
+		case event, ok := <-watcher.Events:
+			if !ok {
+				continue
+			}
+			if event.Op&fsnotify.Write == fsnotify.Write {
+				readDataDebounced()
+			}
+		case err, ok := <-watcher.Errors:
+			if ok {
+				log.Printf("Data file watcher error: %v", err)
 			}
 		}
 	}
+}
 
-	for { // outer loop to restart watcher on path change
-		watcher, err := fsnotify.NewWatcher()
-		if err != nil {
-			log.Fatalf("Error creating file watcher: %v", err)
-		}
-		if err := watcher.Add(dataFilePath); err != nil {
-			log.Fatalf("Error watching data file: %v", err)
-		}
-		pathChanged := false
-		for { // inner loop to watch current path
-			select {
-			case event, ok := <-watcher.Events:
-				if !ok {
-					continue
-				}
-				if event.Op&fsnotify.Write == fsnotify.Write {
-					if pauseFileWatcher.Load() {
-						continue
-					}
-					if err := ReadDataFile(); err != nil {
-						log.Printf("Error reloading data file in file watcher: %v", err)
-					}
-				}
-			case err, ok := <-watcher.Errors:
-				if ok {
-					log.Printf("Data file watcher error: %v", err)
-				}
-			case newDataFilePath, ok := <-changeDataFilePathChannel:
-				if !ok {
-					watcher.Close()
-					return
-				}
-				if dataFilePath != newDataFilePath {
-					log.Printf("Data file path changed from %s to %s. Restarting watcher.", dataFilePath, newDataFilePath)
-					watcher.Close()
-					pathChanged = true
-					dataFilePath = newDataFilePath
-				}
-			}
-			if pathChanged {
-				break
-			}
-		}
-		if pathChanged {
-			continue
-		}
-		return
+func createWatcher(datafilePath string) *fsnotify.Watcher {
+	watcher, err := fsnotify.NewWatcher()
+	if err != nil {
+		log.Fatalf("Error creating file watcher: %v", err)
+	}
+	if err := watcher.Add(datafilePath); err != nil {
+		log.Fatalf("Error watching data file: %v", err)
+	}
+	return watcher
+}
+
+func ReadDataFileIgnoreError() {
+	err := ReadDataFile()
+	if err == nil {
+		log.Printf("Error reloading data file in file watcher: %v", err)
 	}
 }
