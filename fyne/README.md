@@ -4,10 +4,6 @@ https://docs.fyne.io
 
 ## Todo
 
-- synchronize files on save - watch file for changes and update.
-  - at start/open file/save file, stop watching any other files and start watching that file
-  - if that file changes, reload the tasks from it
-- watch config and data for changes and save if any changes
 - make vue ui in fyne
 - display errors in toasts
 - export file
