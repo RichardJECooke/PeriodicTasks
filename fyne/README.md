@@ -17,7 +17,6 @@ https://docs.fyne.io
 - minimize the build with UPX
 - decide on versioning scheme and set version number
 - update readme
-- update neutralino.config
 - bundle with flatpak, not freedesktop, use org.electronjs.Electron28.BaseApp
 ---
 - make same project in fyne/go, gtk4/ts, avalonia/c#
