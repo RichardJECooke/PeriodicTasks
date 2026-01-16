@@ -45,7 +45,7 @@ export async function writeDataFile(): Promise<void> {
     await Neutralino.filesystem.writeFile(_store.config.dataFilePath, JSON.stringify(_store.taskGroups[0], null, 4));
 
     // TODO ERROR
-    let watcherId = await Neutralino.filesystem.createWatcher(_store.config.dataFilePath); // '/home/me/.config/info.richardcooke.PeriodicTasks/tasks.json'
+    //let watcherId = await Neutralino.filesystem.createWatcher(_store.config.dataFilePath); // '/home/me/.config/info.richardcooke.PeriodicTasks/tasks.json'
     // Neutralino.events.on('watchFile', (evt) => {if (watcherId == evt.detail.id) {console.log(evt.detail);}});
     // await Neutralino.filesystem.removeWatcher(watcherId);
   }

@@ -8,7 +8,7 @@ import { store as _store } from '../3store.ts';
 </script>
 
 <template>
-  <h1>Periodic Task Tracker</h1>
+  <h1>Periodic Tasks</h1>
   <div><OpenTasks /></div>
   <div><SaveTasks /></div>
 
