@@ -12,6 +12,7 @@ https://docs.fyne.io
 - add minimize to taskbar with quit and restore menu items
 - add help/tips
 - style
+- change file write, to write temp and rename
 - write tests - https://docs.fyne.io/started/testing/
 - add metadata - https://docs.fyne.io/started/metadata/
 - minimize the build with UPX
@@ -59,4 +60,7 @@ cd ~/code/PeriodicTasks/fyne;
 cd build;
 fyne package -os linux -release;
 cd ..
+
+# if stuff hangs
+go clean -modcache && go mod tidy
 ```

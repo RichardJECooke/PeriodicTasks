@@ -6,7 +6,10 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"strings"
 	"time"
+
+	"github.com/google/uuid"
 
 	types "github.com/RichardJECooke/PeriodicTasks/src/0types"
 	constants "github.com/RichardJECooke/PeriodicTasks/src/1constants"
@@ -36,9 +39,14 @@ func WriteDataFile() {
 	if err != nil {
 		log.Fatalf("Fatal converting objects to JSON writing data file: %v", err)
 	}
+	dataFilePath := store.GetStore().Config.DataFilePath
+	tempDataFilePath := filepath.Join(filepath.Dir(dataFilePath), strings.ToLower(uuid.New().String())+".json")
 	PauseFileWatcher(true)
-	if err = os.WriteFile(store.GetStore().Config.DataFilePath, jsonData, constants.Permission_RWX_RX_RX); err != nil {
-		log.Fatalf("Fatal error writing data file: %v", err)
+	if err = os.WriteFile(tempDataFilePath, jsonData, constants.Permission_RWX_RX_RX); err != nil {
+		log.Fatalf("Fatal error writing temporary data file: %v", err)
+	}
+	if err = os.Rename(tempDataFilePath, dataFilePath); err != nil {
+		log.Fatalf("Fatal error renaming temporary data file: %v", err)
 	}
 	go func() {
 		time.Sleep(1 * time.Second)
@@ -51,8 +59,13 @@ func WriteConfigFile() {
 	if err != nil {
 		log.Fatalf("Fatal error converting objects to JSON writing config file: %v", err)
 	}
-	if err = os.WriteFile(store.GetStore().Config.ConfigFilePath, jsonData, constants.Permission_RWX_RX_RX); err != nil {
-		log.Fatalf("Fatal error writing config file: %v", err)
+	configFilePath := store.GetStore().Config.ConfigFilePath
+	tempConfigFilePath := filepath.Join(filepath.Dir(configFilePath), strings.ToLower(uuid.New().String())+".json")
+	if err = os.WriteFile(tempConfigFilePath, jsonData, constants.Permission_RWX_RX_RX); err != nil {
+		log.Fatalf("Fatal error writing temporary config file: %v", err)
+	}
+	if err = os.Rename(tempConfigFilePath, configFilePath); err != nil {
+		log.Fatalf("Fatal error renaming temporary config file: %v", err)
 	}
 }
 
