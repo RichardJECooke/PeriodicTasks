@@ -11,7 +11,8 @@ async function start() {
   try { await _fileHelper.startup(); }
   catch (e) {
     console.error('Error message: ' + JSON.stringify(e));
-    await Neutralino.app.exit(1); }
+    await Neutralino.app.exit(1);
+  }
   // startNeutralinoEvents();
 }
 

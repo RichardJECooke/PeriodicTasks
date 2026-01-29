@@ -16,7 +16,7 @@
   },
   "nativeAllowList": [
     "app.exit",
-    "filesystem.createDirectory", "filesystem.readDirectory", "filesystem.readFile", "filesystem.writeFile", "filesystem.createWatcher", "filesystem.removeWatcher",
+    "filesystem.createDirectory", "filesystem.getPathParts", "filesystem.readDirectory", "filesystem.readFile", "filesystem.writeFile", "filesystem.createWatcher", "filesystem.removeWatcher",
     "os.getPath", "os.showMessageBox", "os.showSaveDialog", "os.showOpenDialog"
   ],
   "globalVariables": {
@@ -33,7 +33,7 @@
   },
   "modes": {
     "window": {
-      "title": "myapp",
+      "title": "Periodic Tasks",
       "width": 800,
       "height": 900,
       "minWidth": 400,
