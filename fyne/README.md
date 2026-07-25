@@ -33,8 +33,8 @@ https://docs.fyne.io
 
 ```sh
 # setup go and fyne
-cd ~/code/PeriodicTasks/fyne;
-sudo apt install golang gcc libgl1-mesa-dev xorg-dev libxkbcommon-dev;
+cd ~/code/PeriodicTasks/fyne
+sudo apt install -y golang gcc libgl1-mesa-dev xorg-dev libxkbcommon-dev
 echo 'PATH="$PATH:$HOME/go/bin"' >> ~/.bashrc
 source ~/.bashrc
 # go mod init PeriodicTasks; don't run again. project already exists
@@ -50,18 +50,18 @@ add:
 # run
 cd ~/code/PeriodicTasks/fyne;
 go mod tidy;
-clear; go run .;
+reset && go run .
 
 # check and test
-cd ~/code/PeriodicTasks/fyne;
+cd ~/code/PeriodicTasks/fyne
 go fmt ./...
 go vet ./...
 go test ./...
-go build -ldflags "-s -w" -o build/PeriodicTasks;   # remove debug and symbol data
+go build -ldflags "-s -w" -o build/PeriodicTasks   # remove debug and symbol data
 
 # publish
-cd ~/code/PeriodicTasks/fyne;
-cd build;
-fyne package -os linux -release;
+cd ~/code/PeriodicTasks/fyne
+cd build
+fyne package -os linux -release
 cd ..
 ```

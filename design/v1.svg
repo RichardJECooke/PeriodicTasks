@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="1280"
+   height="720"
+   viewBox="0 0 1280 720"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
+   sodipodi:docname="v1.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#d3d3d3"
+     bordercolor="#000000"
+     borderopacity="0"
+     inkscape:showpageshadow="false"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="false"
+     inkscape:deskcolor="#d3d3d3"
+     inkscape:document-units="px"
+     inkscape:zoom="0.74898461"
+     inkscape:cx="1341.8166"
+     inkscape:cy="357.1502"
+     inkscape:window-width="2560"
+     inkscape:window-height="1391"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer5"
+     showborder="false"
+     borderlayer="false"
+     inkscape:antialias-rendering="true"
+     inkscape:clip-to-page="false">
+    <inkscape:page
+       x="0"
+       y="0"
+       width="1280"
+       height="720"
+       id="page1"
+       margin="0"
+       bleed="0" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1">
+    <linearGradient
+       id="swatch59"
+       inkscape:swatch="solid"
+       inkscape:label="black"
+       inkscape:pinned="true">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop59" />
+    </linearGradient>
+    <linearGradient
+       id="swatch58">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop58" />
+    </linearGradient>
+    <linearGradient
+       id="swatch57"
+       inkscape:swatch="solid"
+       inkscape:label="titleBar"
+       inkscape:pinned="true">
+      <stop
+         style="stop-color:#5e5e5e;stop-opacity:1;"
+         offset="0"
+         id="stop57" />
+    </linearGradient>
+    <linearGradient
+       id="swatch56">
+      <stop
+         style="stop-color:#303030;stop-opacity:1;"
+         offset="0"
+         id="stop56" />
+    </linearGradient>
+    <linearGradient
+       id="swatch6"
+       inkscape:label="black">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop6" />
+    </linearGradient>
+    <rect
+       x="36.048805"
+       y="50.735355"
+       width="136.18437"
+       height="78.773315"
+       id="rect5" />
+    <linearGradient
+       id="swatch2"
+       inkscape:label="appBackgroundGradient"
+       inkscape:pinned="true">
+      <stop
+         style="stop-color:#111111;stop-opacity:1;"
+         offset="0"
+         id="stop2" />
+      <stop
+         style="stop-color:#303030;stop-opacity:1;"
+         offset="1"
+         id="stop75" />
+    </linearGradient>
+    <linearGradient
+       id="swatch1"
+       inkscape:label="g"
+       inkscape:pinned="true">
+      <stop
+         style="stop-color:#347e67;stop-opacity:1;"
+         offset="0"
+         id="stop1" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#swatch6"
+       id="linearGradient53"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-1.9436262,-41.08216)"
+       x1="-115.28662"
+       y1="6.7767463"
+       x2="-96.892578"
+       y2="6.7767463" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#swatch2"
+       id="linearGradient77"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(18.677495,0,0,10.257738,-4889.8524,-527.82917)"
+       x1="314.77856"
+       y1="52.28627"
+       x2="314.77856"
+       y2="120.81801" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#swatch57"
+       id="linearGradient57"
+       x1="350.42157"
+       y1="6.5473571"
+       x2="688.55908"
+       y2="6.5473571"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(3.7828938,0,0,2.8043923,-975.75533,-0.21114686)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#swatch59"
+       id="linearGradient58"
+       x1="350.4216"
+       y1="6.5473571"
+       x2="688.55908"
+       y2="6.5473571"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(3.7828938,0,0,2.8043923,-975.75547,-0.21114686)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#swatch6"
+       id="linearGradient80"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(424.50768,-94.205657)"
+       x1="-115.28662"
+       y1="6.7767463"
+       x2="-96.892578"
+       y2="6.7767463" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#swatch59"
+       id="linearGradient95"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(0,-2.933334)"
+       x1="-115.28662"
+       y1="99.986183"
+       x2="-36.393997"
+       y2="99.986183" />
+  </defs>
+  <g
+     inkscape:label="Notes"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(118.66664)">
+    <text
+       xml:space="preserve"
+       style="font-size:16px;writing-mode:lr-tb;direction:ltr;opacity:1;fill:url(#linearGradient95);fill-opacity:1;stroke-width:0.529167"
+       x="-115.28662"
+       y="21.546061"
+       id="text7"><tspan
+         sodipodi:role="line"
+         id="tspan7"
+         style="font-size:16px;fill:url(#linearGradient95);stroke-width:0.529167"
+         x="-115.28662"
+         y="21.546061">- Title</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:16px;fill:url(#linearGradient95);stroke-width:0.529167"
+         x="-115.28662"
+         y="41.546059"
+         id="tspan8">- Open tasks file</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:16px;fill:url(#linearGradient95);stroke-width:0.529167"
+         x="-115.28662"
+         y="61.546059"
+         id="tspan9">- Save tasks file</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:16px;fill:url(#linearGradient95);stroke-width:0.529167"
+         x="-115.28662"
+         y="81.546059"
+         id="tspan10" /><tspan
+         sodipodi:role="line"
+         style="font-size:16px;fill:url(#linearGradient95);stroke-width:0.529167"
+         x="-115.28662"
+         y="101.54606"
+         id="tspan11">- Tasks</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:16px;fill:url(#linearGradient95);stroke-width:0.529167"
+         x="-115.28662"
+         y="121.54606"
+         id="tspan12">  - Add task</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:16px;fill:url(#linearGradient95);stroke-width:0.529167"
+         x="-115.28662"
+         y="141.54607"
+         id="tspan13">  - Task list</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:16px;fill:url(#linearGradient95);stroke-width:0.529167"
+         x="-115.28662"
+         y="161.54607"
+         id="tspan14">  - Mark as done today</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:16px;fill:url(#linearGradient95);stroke-width:0.529167"
+         x="-115.28662"
+         y="181.54607"
+         id="tspan15">  - Edit</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:16px;fill:url(#linearGradient95);stroke-width:0.529167"
+         x="-115.28662"
+         y="201.54607"
+         id="tspan16">    - Name</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:16px;fill:url(#linearGradient95);stroke-width:0.529167"
+         x="-115.28662"
+         y="221.54607"
+         id="tspan17">    - Repeats every x days</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:16px;fill:url(#linearGradient95);stroke-width:0.529167"
+         x="-115.28662"
+         y="241.54607"
+         id="tspan18">    - Archive task</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:16px;fill:url(#linearGradient95);stroke-width:0.529167"
+         x="-115.28662"
+         y="261.54605"
+         id="tspan19">    - Stop editing</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:16px;fill:url(#linearGradient95);stroke-width:0.529167"
+         x="-115.28662"
+         y="281.54605"
+         id="tspan20">    - Date completed list</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:16px;fill:url(#linearGradient95);stroke-width:0.529167"
+         x="-115.28662"
+         y="301.54605"
+         id="tspan21">      - Change date</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:16px;fill:url(#linearGradient95);stroke-width:0.529167"
+         x="-115.28662"
+         y="321.54605"
+         id="tspan22">      - Delete date completed</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:16px;fill:url(#linearGradient95);stroke-width:0.529167"
+         x="-115.28662"
+         y="341.54605"
+         id="tspan23">- Archived tasks</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:16px;fill:url(#linearGradient95);stroke-width:0.529167"
+         x="-115.28662"
+         y="361.54605"
+         id="tspan24">  - List</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:16px;fill:url(#linearGradient95);stroke-width:0.529167"
+         x="-115.28662"
+         y="381.54605"
+         id="tspan25">  - Unarchive</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:16px;fill:url(#linearGradient95);stroke-width:0.529167"
+         x="-115.28662"
+         y="401.54605"
+         id="tspan26">  - Delete</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:16px;fill:url(#linearGradient95);stroke-width:0.529167"
+         x="-115.28662"
+         y="421.54605"
+         id="tspan27">- Toasts</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:16px;fill:url(#linearGradient95);stroke-width:0.529167"
+         x="-115.28662"
+         y="441.54605"
+         id="tspan28">  - Saved</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:16px;fill:url(#linearGradient95);stroke-width:0.529167"
+         x="-115.28662"
+         y="461.54605"
+         id="tspan29">  - Error</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';writing-mode:lr-tb;direction:ltr;opacity:1;fill:url(#linearGradient53);fill-opacity:1;stroke-width:0.529167"
+       x="-117.78423"
+       y="-32.250759"
+       id="text6"
+       inkscape:label="title"><tspan
+         sodipodi:role="line"
+         id="tspan6"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:url(#linearGradient53);fill-opacity:1;stroke-width:0.529167"
+         x="-117.78423"
+         y="-32.250759">Notes</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2-2"
+     inkscape:label="Components"
+     transform="translate(45.043741,53.383947)">
+    <g
+       id="g77"
+       inkscape:label="page"
+       transform="translate(-41.465097,-53.123497)">
+      <rect
+         style="opacity:1;fill:url(#linearGradient77);stroke-width:7.32446"
+         id="rect2"
+         width="1280"
+         height="720"
+         x="349.42136"
+         y="-1.509903e-14"
+         ry="0"
+         rx="0"
+         inkscape:label="bg" />
+      <rect
+         style="opacity:1;fill:url(#linearGradient57);stroke:url(#linearGradient58);stroke-width:0.861773;stroke-dasharray:none"
+         id="rect55"
+         width="1279.1382"
+         height="35.138226"
+         x="349.85226"
+         y="0.58109593"
+         ry="0"
+         rx="0"
+         inkscape:label="tbar" />
+      <text
+         xml:space="preserve"
+         style="font-size:16px;writing-mode:lr-tb;direction:ltr;fill:#f1f1f1;fill-opacity:1;stroke-width:0.529167"
+         x="357.30713"
+         y="22.915907"
+         id="text57"
+         inkscape:label="heading"><tspan
+           sodipodi:role="line"
+           id="tspan57"
+           style="font-size:16px;fill:#f1f1f1;fill-opacity:1;stroke-width:0.529167"
+           x="357.30713"
+           y="22.915907">Periodic tasks</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';writing-mode:lr-tb;direction:ltr;fill:url(#linearGradient80);fill-opacity:1;stroke-width:0.529167"
+       x="308.66708"
+       y="-85.37426"
+       id="text6-2-3"
+       inkscape:label="title"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:url(#linearGradient80);fill-opacity:1;stroke-width:0.529167"
+         x="308.66708"
+         y="-85.37426"
+         id="tspan95">Components</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer5"
+     inkscape:label="start">
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g77"
+       id="use95"
+       transform="translate(1390.8658,53.383947)"
+       inkscape:label="page" />
+  </g>
+</svg>
